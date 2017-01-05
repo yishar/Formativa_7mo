@@ -23,6 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'aux1' => $aux1,
         'searchModel1' => $searchModel1,
         'dataProvider' => $dataProvider,
+
         
     ]) ?>
 

@@ -11,25 +11,25 @@ use yii\widgets\ActiveForm;
 <div class="actividad-search">
 
     <?php $form = ActiveForm::begin([
-        'action' => ['index'],
+        'action' => ['create'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'Nombre') ?>
+    <?php // $form->field($model, 'Nombre') ?>
 
-    <?= $form->field($model, 'Lugar') ?>
+    <?php // $form->field($model, 'Lugar') ?>
 
-    <?= $form->field($model, 'Fecha_inicio') ?>
+    <?php // $form->field($model, 'Fecha_inicio') ?>
 
-    <?= $form->field($model, 'Fecha_fin') ?>
+    <?php // $form->field($model, 'Fecha_fin') ?>
 
-    <?= $form->field($model, 'Id_actividad') ?>
+    <?php // $form->field($model, 'Id_actividad') ?>
 
-    <?php // echo $form->field($model, 'CedulaCoordi') ?>
+    <?= $form->field($model, 'CedulaCoordi') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <?php // Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

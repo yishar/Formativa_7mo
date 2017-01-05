@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use common\models\Actividad;
 use common\models\ActividadSearch;
+use common\models\CoordinadorSocialSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -65,12 +66,22 @@ class ActividadController extends Controller
     public function actionCreate()
     {
         $model = new Actividad();
+        $searchModel1 = new CoordinadorSocialSearch();
+        $dataProvider = $searchModel1->search(Yii::$app->request->queryParams);
+        $aux1 = $searchModel1->CedulaCoordi;
+        
+         if ($searchModel1->CedulaCoordi === null)
+        $searchModel1->CedulaCoordi = 000;
+        
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'Id_actividad' => $model->Id_actividad, 'CedulaCoordi' => $model->CedulaCoordi]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'dataProvider' => $dataProvider,
+                'searchModel1' => $searchModel1,
+                'aux1' => $aux1,
             ]);
         }
     }

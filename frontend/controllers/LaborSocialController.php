@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use common\models\LaborSocial;
 use common\models\LaborSocialSearch;
+use common\models\Estudiante;
 use common\models\EstudianteSearch;
 use common\models\CoordinadorSocialSearch;
 use yii\web\Controller;
@@ -72,10 +73,8 @@ class LaborSocialController extends Controller
         $dataProvider = $searchModel1->search(Yii::$app->request->queryParams);
         $aux1 = $searchModel1->Cedula;
         
-     /*  if($searchModel===null)
-       {
-           $searchModel->Cedula='111';
-       }    */
+        if ($searchModel1->Cedula === null)
+        $searchModel1->Cedula = 000;
         
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -86,7 +85,6 @@ class LaborSocialController extends Controller
                 'searchModel1' => $searchModel1,
                 'dataProvider' => $dataProvider,
                 'aux1' => $aux1,
-                
                
             ]);
         }

@@ -121,5 +121,13 @@ class EstudianteController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    public function findModele($id)
+    {
+        if (($model = Estudiante::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
    
 }
