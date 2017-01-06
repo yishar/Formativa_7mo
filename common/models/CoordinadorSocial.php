@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "coordinador_social".
  *
- * @property integer $CedulaCoordi
+ * @property string $CedulaCoordi
  * @property string $Nombre
  * @property string $Apellido
  *
@@ -30,7 +30,7 @@ class CoordinadorSocial extends \yii\db\ActiveRecord
     {
         return [
             [['CedulaCoordi'], 'required'],
-            [['CedulaCoordi'], 'integer'],
+            [['CedulaCoordi'], 'string', 'max' => 10],
             [['Nombre', 'Apellido'], 'string', 'max' => 40],
         ];
     }

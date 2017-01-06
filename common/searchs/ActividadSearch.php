@@ -1,16 +1,16 @@
 <?php
 
-namespace common\models;
+namespace common\searchs;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Estudiante;
+use common\models\Actividad;
 
 /**
- * EstudianteSearch represents the model behind the search form about `common\models\Estudiante`.
+ * ActividadSearch represents the model behind the search form about `common\models\Actividad`.
  */
-class EstudianteSearch extends Estudiante
+class ActividadSearch extends Actividad
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class EstudianteSearch extends Estudiante
     public function rules()
     {
         return [
-            [['Cedula'], 'integer'],
-            [['Nombres', 'Apellidos'], 'safe'],
+            [['Nombre', 'Lugar', 'Fecha_inicio', 'Fecha_fin', 'CedulaCoordi'], 'safe'],
+            [['Id_actividad'], 'integer'],
         ];
     }
 
@@ -41,9 +41,7 @@ class EstudianteSearch extends Estudiante
      */
     public function search($params)
     {
-        $query = Estudiante::find();
-
-        // add conditions that should always apply here
+        $query = Actividad::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -57,13 +55,15 @@ class EstudianteSearch extends Estudiante
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
-            'Cedula' => $this->Cedula,
+            'Fecha_inicio' => $this->Fecha_inicio,
+            'Fecha_fin' => $this->Fecha_fin,
+            'Id_actividad' => $this->Id_actividad,
         ]);
 
-        $query->andFilterWhere(['like', 'Nombres', $this->Nombres])
-            ->andFilterWhere(['like', 'Apellidos', $this->Apellidos]);
+        $query->andFilterWhere(['like', 'Nombre', $this->Nombre])
+            ->andFilterWhere(['like', 'Lugar', $this->Lugar])
+            ->andFilterWhere(['like', 'CedulaCoordi', $this->CedulaCoordi]);
 
         return $dataProvider;
     }

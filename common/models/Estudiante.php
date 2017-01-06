@@ -7,9 +7,9 @@ use Yii;
 /**
  * This is the model class for table "estudiante".
  *
- * @property integer $Cedula
- * @property string $Nombres
- * @property string $Apellidos
+ * @property string $Cedula
+ * @property string $Nombre
+ * @property string $Apellido
  *
  * @property LaborSocial[] $laborSocials
  * @property Actividad[] $idActividads
@@ -32,8 +32,8 @@ class Estudiante extends \yii\db\ActiveRecord
     {
         return [
             [['Cedula'], 'required'],
-            [['Cedula'], 'integer'],
-            [['Nombres', 'Apellidos'], 'string', 'max' => 40],
+            [['Cedula'], 'string', 'max' => 10],
+            [['Nombre', 'Apellido'], 'string', 'max' => 40],
         ];
     }
 
@@ -44,8 +44,8 @@ class Estudiante extends \yii\db\ActiveRecord
     {
         return [
             'Cedula' => 'Cedula',
-            'Nombres' => 'Nombres',
-            'Apellidos' => 'Apellidos',
+            'Nombre' => 'Nombre',
+            'Apellido' => 'Apellido',
         ];
     }
 
@@ -54,7 +54,7 @@ class Estudiante extends \yii\db\ActiveRecord
      */
     public function getLaborSocials()
     {
-        return $this->hasMany(LaborSocial::className(), ['CedulaCoordi' => 'Cedula']);
+        return $this->hasMany(LaborSocial::className(), ['Cedula' => 'Cedula']);
     }
 
     /**
@@ -62,7 +62,7 @@ class Estudiante extends \yii\db\ActiveRecord
      */
     public function getIdActividads()
     {
-        return $this->hasMany(Actividad::className(), ['Id_actividad' => 'Id_actividad', 'CedulaCoordi' => 'Cedula'])->viaTable('labor_social', ['CedulaCoordi' => 'Cedula']);
+        return $this->hasMany(Actividad::className(), ['Id_actividad' => 'Id_actividad', 'CedulaCoordi' => 'CedulaCoordi'])->viaTable('labor_social', ['Cedula' => 'Cedula']);
     }
 
     /**

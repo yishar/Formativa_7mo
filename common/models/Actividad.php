@@ -12,11 +12,11 @@ use Yii;
  * @property string $Fecha_inicio
  * @property string $Fecha_fin
  * @property integer $Id_actividad
- * @property integer $CedulaCoordi
+ * @property string $CedulaCoordi
  *
  * @property CoordinadorSocial $cedulaCoordi
  * @property LaborSocial[] $laborSocials
- * @property Estudiante[] $cedulaCoordis
+ * @property Estudiante[] $cedulas
  */
 class Actividad extends \yii\db\ActiveRecord
 {
@@ -36,8 +36,8 @@ class Actividad extends \yii\db\ActiveRecord
         return [
             [['Fecha_inicio', 'Fecha_fin'], 'safe'],
             [['CedulaCoordi'], 'required'],
-            [['CedulaCoordi'], 'integer'],
             [['Nombre', 'Lugar'], 'string', 'max' => 40],
+            [['CedulaCoordi'], 'string', 'max' => 10],
             [['CedulaCoordi'], 'exist', 'skipOnError' => true, 'targetClass' => CoordinadorSocial::className(), 'targetAttribute' => ['CedulaCoordi' => 'CedulaCoordi']],
         ];
     }
@@ -70,14 +70,14 @@ class Actividad extends \yii\db\ActiveRecord
      */
     public function getLaborSocials()
     {
-        return $this->hasMany(LaborSocial::className(), ['Id_actividad' => 'Id_actividad', 'Cedula' => 'CedulaCoordi']);
+        return $this->hasMany(LaborSocial::className(), ['Id_actividad' => 'Id_actividad', 'CedulaCoordi' => 'CedulaCoordi']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCedulaCoordis()
+    public function getCedulas()
     {
-        return $this->hasMany(Estudiante::className(), ['Cedula' => 'CedulaCoordi'])->viaTable('labor_social', ['Id_actividad' => 'Id_actividad', 'Cedula' => 'CedulaCoordi']);
+        return $this->hasMany(Estudiante::className(), ['Cedula' => 'Cedula'])->viaTable('labor_social', ['Id_actividad' => 'Id_actividad', 'CedulaCoordi' => 'CedulaCoordi']);
     }
 }

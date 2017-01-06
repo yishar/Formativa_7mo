@@ -35,10 +35,7 @@ AppAsset::register($this);
             ]);
             $menuItems = [
                 ['label' => 'Inicio', 'url' => ['/site/index']],
-                ['label' => 'Actividades', 'url' => ['/actividad']],
-                ['label' => 'Coordinadores', 'url' => ['/coordinador-social']],
-                ['label' => 'Labor Social', 'url' => ['/labor-social']],
-                ['label' => 'Estudiantes', 'url' => ['/estudiante']],
+                
                     //['label' => 'About', 'url' => ['/site/about']],
                     //['label' => 'Contact', 'url' => ['/site/contact']],
             ];
@@ -48,7 +45,10 @@ AppAsset::register($this);
             } else {
                 $menuItems = [
                     ['label' => 'Inicio', 'url' => ['/site/index']],
-  
+                ['label' => 'Actividades', 'url' => ['/actividad']],
+                ['label' => 'Coordinadores', 'url' => ['/coordinador-social']],
+                ['label' => 'Labor Social', 'url' => ['/labor-social']],
+                ['label' => 'Estudiantes', 'url' => ['/estudiante']],
                     //['label' => 'BACKEND', 'url' => '../../backend/web','visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin'),],
                 ];
          $menuItems[] = '<li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Perfil <b class="caret"></b></a>'
