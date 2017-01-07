@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b7f03bbd004c82eaea85fd3ff3aecad6",
-    "content-hash": "93fcb8c84212be43df94613f83f3280b",
+    "hash": "9c7e84504a1bfdcd2580b66c3a95e66d",
+    "content-hash": "8810dbb663e7c3c8f439871d7aaac022",
     "packages": [
         {
             "name": "2amigos/yii2-chartjs-widget",
@@ -1124,16 +1124,16 @@
         },
         {
             "name": "kartik-v/yii2-widget-select2",
-            "version": "v2.0.8",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-select2.git",
-                "reference": "4d03239c1e28ef8d3b96ab7fe360f5cbda34fb69"
+                "reference": "e135c25d7b367e4b63613f7c03f884535f1072f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/4d03239c1e28ef8d3b96ab7fe360f5cbda34fb69",
-                "reference": "4d03239c1e28ef8d3b96ab7fe360f5cbda34fb69",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/e135c25d7b367e4b63613f7c03f884535f1072f5",
+                "reference": "e135c25d7b367e4b63613f7c03f884535f1072f5",
                 "shasum": ""
             },
             "require": {
@@ -1173,7 +1173,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-02-17 11:49:30"
+            "time": "2016-12-30 03:26:33"
         },
         {
             "name": "phpspec/php-diff",
@@ -1795,6 +1795,7 @@
                 "codeception",
                 "yii2"
             ],
+            "abandoned": "codeception/codeception",
             "time": "2016-03-17 03:41:26"
         },
         {
@@ -1849,7 +1850,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "dektrium/yii2-user": 20,
-        "dektrium/yii2-rbac": 20
+        "dektrium/yii2-rbac": 20,
+        "kartik-v/yii2-widget-select2": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

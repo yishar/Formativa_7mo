@@ -1,6 +1,9 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use common\models\CoordinadorSocial;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Actividad */
@@ -9,7 +12,11 @@ use yii\widgets\ActiveForm;
 
 <div class="actividad-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(); 
+    $coordinador = CoordinadorSocial::find()->all();
+    
+    $data = ArrayHelper::map($coordinador, 'CedulaCoordi', 'Nombre');
+    ?>
 
     <?= $form->field($model, 'Nombre')->textInput(['maxlength' => true]) ?>
 
@@ -20,7 +27,15 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'Fecha_fin')->textInput() ?>
 
     <?= $form->field($model, 'CedulaCoordi')->textInput(['maxlength' => true]) ?>
-
+<?= $form->field($model, 'CedulaCoordi')->widget(Select2::classname(), [
+    'data' => $data,
+    'language' => 'en',
+    'options' => ['placeholder' => 'Select a state ...'],
+    'pluginOptions' => [
+        'allowClear' => true
+    ],
+]);
+   ?>
   
 	<?php if (!Yii::$app->request->isAjax){ ?>
 	  	<div class="form-group">
