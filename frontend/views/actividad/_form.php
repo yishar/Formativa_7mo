@@ -26,11 +26,11 @@ use kartik\select2\Select2;
 
     <?= $form->field($model, 'Fecha_fin')->textInput() ?>
 
-    <?= $form->field($model, 'CedulaCoordi')->textInput(['maxlength' => true]) ?>
+    <?php // $form->field($model, 'CedulaCoordi')->textInput(['maxlength' => true]) ?>
 <?= $form->field($model, 'CedulaCoordi')->widget(Select2::classname(), [
     'data' => $data,
     'language' => 'en',
-    'options' => ['placeholder' => 'Select a state ...'],
+    'options' => ['placeholder' => 'Seleccione un coordinador ...'],
     'pluginOptions' => [
         'allowClear' => true
     ],
