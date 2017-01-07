@@ -12,6 +12,9 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\data\ArrayDataProvider;
+use yii\httpclient\Client;
+use yii\helpers\Json;
 
 /**
  * Site controller
@@ -87,7 +90,26 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
-
+//lee los servicios de estudiantes
+    public function actionServicioe() {
+        $client = new Client(['baseUrl' => 'http://mundogya.com/servicios/frontend/web/']);
+        $response = $client->createRequest()
+                ->setUrl('estudiantes')//toma los datos del controlador estudiantes del servicio que nos estan dando
+                //->setMethod('post')
+                //->setData(['nummatricula'=>9854])busca por matricula, esto sera remplazado por el nombre del campo del formulario
+                ->addHeaders(['content-type' => 'application/json'])
+                ->send();
+        $data = Json::decode($response->content);
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $data,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);
+        return $this->render('servicioE', [
+                    'dataProvider' => $dataProvider,
+        ]);
+    }
     /**
      * Logs out the current user.
      *
