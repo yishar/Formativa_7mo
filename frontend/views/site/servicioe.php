@@ -20,6 +20,14 @@ $this->title = 'Home';
 
         <?= GridView::widget([
         'dataProvider' => $dataProvider,
+          'columns' => [
+            'idEstudiante',
+            'nummatricula',
+            'E_cedula',
+            'nombres',
+            'apellidos',
+             'nivel',
+        ],
             'summary'=>''
     ]); ?>
     </div>

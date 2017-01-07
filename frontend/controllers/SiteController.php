@@ -90,6 +90,7 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
+    
 //lee los servicios de estudiantes
     public function actionServicioe() {
         $client = new Client(['baseUrl' => 'http://mundogya.com/servicios/frontend/web/']);
