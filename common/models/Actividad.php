@@ -52,7 +52,7 @@ class Actividad extends \yii\db\ActiveRecord
             'Fecha_inicio' => 'Fecha Inicio',
             'Fecha_fin' => 'Fecha Finalización',
             'Id_actividad' => 'Id Actividad',
-            'CedulaCoordi' => 'Coordinador',
+            'CedulaCoordi' => 'Coordinador asignado',
         ];
     }
 

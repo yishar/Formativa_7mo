@@ -9,7 +9,7 @@ $this->title = 'Home';
     <div class="jumbotron">
         <h1>PUCESE</h1>
 
-        <p class="lead">app</p>
+        <p class="lead">SisHNA</p>
 
   
     </div>

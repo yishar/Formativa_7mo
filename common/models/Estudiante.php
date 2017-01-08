@@ -45,8 +45,8 @@ class Estudiante extends \yii\db\ActiveRecord
     {
         return [
             'Cedula' => 'CI. Estudiante',
-            'Nombre' => 'Nombre',
-            'Apellido' => 'Apellido',
+            'Nombre' => 'Nombres completos',
+            'Apellido' => 'Apellidos completos',
         ];
     }
 

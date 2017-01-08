@@ -42,8 +42,8 @@ class CoordinadorSocial extends \yii\db\ActiveRecord
     {
         return [
             'CedulaCoordi' => 'CI. Coordinador',
-            'Nombre' => 'Nombre',
-            'Apellido' => 'Apellido',
+            'Nombre' => 'Nombres completos',
+            'Apellido' => 'Apellidos Completos',
         ];
     }
 

@@ -43,14 +43,28 @@ AppAsset::register($this);
                 //$menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
                 $menuItems[] = ['label' => 'Login', 'url' => ['/user/security/login']];
             } else {
+                
+                        
                 $menuItems = [
                     ['label' => 'Inicio', 'url' => ['/site/index']],
-                ['label' => 'Actividades', 'url' => ['/actividad']],
-                ['label' => 'Coordinadores', 'url' => ['/coordinador-social']],
-                ['label' => 'Labor Social', 'url' => ['/labor-social']],
+//                ['label' => 'Actividades', 'url' => ['/actividad']],
+//                ['label' => 'Coordinadores', 'url' => ['/coordinador-social']],
+//                ['label' => 'Labor Social', 'url' => ['/labor-social']],
                 ['label' => 'Estudiantes', 'url' => ['/estudiante']],
-                    //['label' => 'BACKEND', 'url' => '../../backend/web','visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin'),],
+                   // ['label' => 'BACKEND', 'url' => '../../backend/web','visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin'),],
                 ];
+                
+                //Aqui van las opciones del menú
+                $menuItems[] = [
+                    'label' => 'Labor Social',
+                    'visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('superadmin'),
+                    'items' => [
+                        ['label' => 'Labor Social', 'url' => ['/labor-social'],],
+                        ['label' => 'Actividades', 'url' => ['/actividad'],],
+                        ['label' => 'Coordinadores', 'url' => ['/coordinador-social'],],
+                    ],
+                ];
+                
          $menuItems[] = '<li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Perfil <b class="caret"></b></a>'
                                .'<ul id="w4" class="dropdown-menu">'
                                 .'<li><a href="'.Yii::$app->homeUrl.'user/settings/account" tabindex="-1">Mi cuenta</a></li>'
