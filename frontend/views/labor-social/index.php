@@ -7,7 +7,7 @@ use johnitvn\ajaxcrud\CrudAsset;
 use johnitvn\ajaxcrud\BulkButtonWidget;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\searchs\LaborSocialSearch */
+/* @var $searchModel frontend\models\LaborSocialSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Labor Socials';
@@ -61,5 +61,8 @@ CrudAsset::register($this);
 <?php Modal::begin([
     "id"=>"ajaxCrudModal",
     "footer"=>"",// always need it for jquery plugin
+    'options' => [ //Habilitar el textfield de busqueda
+      'tabindex' =>false,  
+    ],
 ])?>
 <?php Modal::end(); ?>

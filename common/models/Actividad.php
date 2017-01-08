@@ -16,7 +16,6 @@ use Yii;
  *
  * @property CoordinadorSocial $cedulaCoordi
  * @property LaborSocial[] $laborSocials
- * @property Estudiante[] $cedulas
  */
 class Actividad extends \yii\db\ActiveRecord
 {
@@ -48,12 +47,12 @@ class Actividad extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Nombre' => 'Nombre',
+            'Nombre' => 'Actividad',
             'Lugar' => 'Lugar',
             'Fecha_inicio' => 'Fecha Inicio',
-            'Fecha_fin' => 'Fecha Fin',
+            'Fecha_fin' => 'Fecha Finalización',
             'Id_actividad' => 'Id Actividad',
-            'CedulaCoordi' => 'Cedula Coordi',
+            'CedulaCoordi' => 'Coordinador',
         ];
     }
 
@@ -70,14 +69,6 @@ class Actividad extends \yii\db\ActiveRecord
      */
     public function getLaborSocials()
     {
-        return $this->hasMany(LaborSocial::className(), ['Id_actividad' => 'Id_actividad', 'CedulaCoordi' => 'CedulaCoordi']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCedulas()
-    {
-        return $this->hasMany(Estudiante::className(), ['Cedula' => 'Cedula'])->viaTable('labor_social', ['Id_actividad' => 'Id_actividad', 'CedulaCoordi' => 'CedulaCoordi']);
+        return $this->hasMany(LaborSocial::className(), ['Id_actividad' => 'Id_actividad']);
     }
 }

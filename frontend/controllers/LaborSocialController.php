@@ -4,7 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\LaborSocial;
-use common\searchs\LaborSocialSearch;
+use frontend\models\LaborSocialSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -50,27 +50,25 @@ class LaborSocialController extends Controller
 
     /**
      * Displays a single LaborSocial model.
-     * @param string $Cedula
-     * @param integer $Id_actividad
-     * @param string $CedulaCoordi
+     * @param integer $id
      * @return mixed
      */
-    public function actionView($Cedula, $Id_actividad, $CedulaCoordi)
+    public function actionView($id)
     {   
         $request = Yii::$app->request;
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                    'title'=> "LaborSocial #".$Cedula, $Id_actividad, $CedulaCoordi,
+                    'title'=> "LaborSocial #".$id,
                     'content'=>$this->renderAjax('view', [
-                        'model' => $this->findModel($Cedula, $Id_actividad, $CedulaCoordi),
+                        'model' => $this->findModel($id),
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Edit',['update','Cedula, $Id_actividad, $CedulaCoordi'=>$Cedula, $Id_actividad, $CedulaCoordi],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
                 ];    
         }else{
             return $this->render('view', [
-                'model' => $this->findModel($Cedula, $Id_actividad, $CedulaCoordi),
+                'model' => $this->findModel($id),
             ]);
         }
     }
@@ -126,7 +124,7 @@ class LaborSocialController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'Cedula' => $model->Cedula, 'Id_actividad' => $model->Id_actividad, 'CedulaCoordi' => $model->CedulaCoordi]);
+                return $this->redirect(['view', 'id' => $model->Id_labor_social]);
             } else {
                 return $this->render('create', [
                     'model' => $model,
@@ -140,15 +138,13 @@ class LaborSocialController extends Controller
      * Updates an existing LaborSocial model.
      * For ajax request will return json object
      * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
-     * @param string $Cedula
-     * @param integer $Id_actividad
-     * @param string $CedulaCoordi
+     * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($Cedula, $Id_actividad, $CedulaCoordi)
+    public function actionUpdate($id)
     {
         $request = Yii::$app->request;
-        $model = $this->findModel($Cedula, $Id_actividad, $CedulaCoordi);       
+        $model = $this->findModel($id);       
 
         if($request->isAjax){
             /*
@@ -157,7 +153,7 @@ class LaborSocialController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Update LaborSocial #".$Cedula, $Id_actividad, $CedulaCoordi,
+                    'title'=> "Update LaborSocial #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -167,16 +163,16 @@ class LaborSocialController extends Controller
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "LaborSocial #".$Cedula, $Id_actividad, $CedulaCoordi,
+                    'title'=> "LaborSocial #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $model,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Edit',['update','Cedula, $Id_actividad, $CedulaCoordi'=>$Cedula, $Id_actividad, $CedulaCoordi],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
                 ];    
             }else{
                  return [
-                    'title'=> "Update LaborSocial #".$Cedula, $Id_actividad, $CedulaCoordi,
+                    'title'=> "Update LaborSocial #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -189,7 +185,7 @@ class LaborSocialController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'Cedula' => $model->Cedula, 'Id_actividad' => $model->Id_actividad, 'CedulaCoordi' => $model->CedulaCoordi]);
+                return $this->redirect(['view', 'id' => $model->Id_labor_social]);
             } else {
                 return $this->render('update', [
                     'model' => $model,
@@ -202,15 +198,13 @@ class LaborSocialController extends Controller
      * Delete an existing LaborSocial model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $Cedula
-     * @param integer $Id_actividad
-     * @param string $CedulaCoordi
+     * @param integer $id
      * @return mixed
      */
-    public function actionDelete($Cedula, $Id_actividad, $CedulaCoordi)
+    public function actionDelete($id)
     {
         $request = Yii::$app->request;
-        $this->findModel($Cedula, $Id_actividad, $CedulaCoordi)->delete();
+        $this->findModel($id)->delete();
 
         if($request->isAjax){
             /*
@@ -232,9 +226,7 @@ class LaborSocialController extends Controller
      * Delete multiple existing LaborSocial model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $Cedula
-     * @param integer $Id_actividad
-     * @param string $CedulaCoordi
+     * @param integer $id
      * @return mixed
      */
     public function actionBulkDelete()
@@ -264,15 +256,13 @@ class LaborSocialController extends Controller
     /**
      * Finds the LaborSocial model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $Cedula
-     * @param integer $Id_actividad
-     * @param string $CedulaCoordi
+     * @param integer $id
      * @return LaborSocial the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($Cedula, $Id_actividad, $CedulaCoordi)
+    protected function findModel($id)
     {
-        if (($model = LaborSocial::findOne(['Cedula' => $Cedula, 'Id_actividad' => $Id_actividad, 'CedulaCoordi' => $CedulaCoordi])) !== null) {
+        if (($model = LaborSocial::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

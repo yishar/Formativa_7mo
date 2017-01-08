@@ -10,18 +10,21 @@ return [
         'class' => 'kartik\grid\SerialColumn',
         'width' => '30px',
     ],
-        [
+     /*   [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'Id_labor_social',
+    ],*/
+    [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Cedula',
+        'value'=>  function($model, $key,$index,$column){
+                   return  $model->cedula->Nombre.' '.$model->cedula->Apellido ;   
+         } ,
     ],
-    [
+    /*[
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Id_actividad',
-    ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'CedulaCoordi',
-    ],
+    */
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'N_horas',
@@ -31,7 +34,7 @@ return [
         'dropdown' => false,
         'vAlign'=>'middle',
         'urlCreator' => function($action, $model, $key, $index) { 
-                return Url::to([$action,'Cedula, $Id_actividad, $CedulaCoordi'=>$key]);
+                return Url::to([$action,'id'=>$key]);
         },
         'viewOptions'=>['role'=>'modal-remote','title'=>'View','data-toggle'=>'tooltip'],
         'updateOptions'=>['role'=>'modal-remote','title'=>'Update', 'data-toggle'=>'tooltip'],

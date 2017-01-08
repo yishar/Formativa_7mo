@@ -1,6 +1,6 @@
 <?php
 
-namespace common\searchs;
+namespace frontend\models;
 
 use Yii;
 use yii\base\Model;
@@ -18,8 +18,8 @@ class LaborSocialSearch extends LaborSocial
     public function rules()
     {
         return [
-            [['Cedula', 'CedulaCoordi', 'N_horas'], 'safe'],
-            [['Id_actividad'], 'integer'],
+            [['Id_labor_social', 'Id_actividad'], 'integer'],
+            [['Cedula', 'N_horas'], 'safe'],
         ];
     }
 
@@ -56,11 +56,11 @@ class LaborSocialSearch extends LaborSocial
         }
 
         $query->andFilterWhere([
+            'Id_labor_social' => $this->Id_labor_social,
             'Id_actividad' => $this->Id_actividad,
         ]);
 
         $query->andFilterWhere(['like', 'Cedula', $this->Cedula])
-            ->andFilterWhere(['like', 'CedulaCoordi', $this->CedulaCoordi])
             ->andFilterWhere(['like', 'N_horas', $this->N_horas]);
 
         return $dataProvider;

@@ -7,13 +7,13 @@ use Yii;
 /**
  * This is the model class for table "labor_social".
  *
+ * @property integer $Id_labor_social
  * @property string $Cedula
  * @property integer $Id_actividad
- * @property string $CedulaCoordi
  * @property string $N_horas
  *
- * @property Actividad $idActividad
  * @property Estudiante $cedula
+ * @property Actividad $idActividad
  */
 class LaborSocial extends \yii\db\ActiveRecord
 {
@@ -31,12 +31,12 @@ class LaborSocial extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Cedula', 'Id_actividad', 'CedulaCoordi'], 'required'],
+            [['Cedula', 'Id_actividad'], 'required'],
             [['Id_actividad'], 'integer'],
-            [['Cedula', 'CedulaCoordi'], 'string', 'max' => 10],
+            [['Cedula'], 'string', 'max' => 10],
             [['N_horas'], 'string', 'max' => 40],
-            [['Id_actividad', 'CedulaCoordi'], 'exist', 'skipOnError' => true, 'targetClass' => Actividad::className(), 'targetAttribute' => ['Id_actividad' => 'Id_actividad', 'CedulaCoordi' => 'CedulaCoordi']],
             [['Cedula'], 'exist', 'skipOnError' => true, 'targetClass' => Estudiante::className(), 'targetAttribute' => ['Cedula' => 'Cedula']],
+            [['Id_actividad'], 'exist', 'skipOnError' => true, 'targetClass' => Actividad::className(), 'targetAttribute' => ['Id_actividad' => 'Id_actividad']],
         ];
     }
 
@@ -46,19 +46,11 @@ class LaborSocial extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Cedula' => 'Cedula',
+            'Id_labor_social' => 'Id Labor Social',
+            'Cedula' => 'Estudiante',
             'Id_actividad' => 'Id Actividad',
-            'CedulaCoordi' => 'Cedula Coordi',
             'N_horas' => 'N Horas',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getIdActividad()
-    {
-        return $this->hasOne(Actividad::className(), ['Id_actividad' => 'Id_actividad', 'CedulaCoordi' => 'CedulaCoordi']);
     }
 
     /**
@@ -67,5 +59,13 @@ class LaborSocial extends \yii\db\ActiveRecord
     public function getCedula()
     {
         return $this->hasOne(Estudiante::className(), ['Cedula' => 'Cedula']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdActividad()
+    {
+        return $this->hasOne(Actividad::className(), ['Id_actividad' => 'Id_actividad']);
     }
 }

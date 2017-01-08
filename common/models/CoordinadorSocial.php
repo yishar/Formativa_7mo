@@ -41,7 +41,7 @@ class CoordinadorSocial extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'CedulaCoordi' => 'Cedula Coordi',
+            'CedulaCoordi' => 'CI. Coordinador',
             'Nombre' => 'Nombre',
             'Apellido' => 'Apellido',
         ];

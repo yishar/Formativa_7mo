@@ -12,8 +12,9 @@ use Yii;
  * @property string $Apellido
  *
  * @property LaborSocial[] $laborSocials
- * @property Actividad[] $idActividads
  * @property Matricula[] $matriculas
+ * @property PreProfesionales[] $preProfesionales
+ * @property Vinculacion[] $vinculacions
  */
 class Estudiante extends \yii\db\ActiveRecord
 {
@@ -43,7 +44,7 @@ class Estudiante extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Cedula' => 'Cedula',
+            'Cedula' => 'CI. Estudiante',
             'Nombre' => 'Nombre',
             'Apellido' => 'Apellido',
         ];
@@ -60,16 +61,24 @@ class Estudiante extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdActividads()
+    public function getMatriculas()
     {
-        return $this->hasMany(Actividad::className(), ['Id_actividad' => 'Id_actividad', 'CedulaCoordi' => 'CedulaCoordi'])->viaTable('labor_social', ['Cedula' => 'Cedula']);
+        return $this->hasMany(Matricula::className(), ['Cedula' => 'Cedula']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getMatriculas()
+    public function getPreProfesionales()
     {
-        return $this->hasMany(Matricula::className(), ['Cedula' => 'Cedula']);
+        return $this->hasMany(PreProfesionales::className(), ['Cedula' => 'Cedula']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getVinculacions()
+    {
+        return $this->hasMany(Vinculacion::className(), ['Cedula' => 'Cedula']);
     }
 }

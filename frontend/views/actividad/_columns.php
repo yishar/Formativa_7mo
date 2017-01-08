@@ -26,20 +26,23 @@ return [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Fecha_fin',
     ],
-    [
+    /*[
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Id_actividad',
-    ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'CedulaCoordi',
-    // ],
+    ],*/
+     [
+         'class'=>'\kartik\grid\DataColumn',
+         'attribute'=>'CedulaCoordi',
+         'value'=>  function($model, $key,$index,$column){
+                   return  $model->cedulaCoordi->Nombre.' '.$model->cedulaCoordi->Apellido ;   
+         } ,
+     ],
     [
         'class' => 'kartik\grid\ActionColumn',
         'dropdown' => false,
         'vAlign'=>'middle',
         'urlCreator' => function($action, $model, $key, $index) { 
-                return Url::to([$action,'Id_actividad, $CedulaCoordi'=>$key]);
+                return Url::to([$action,'id'=>$key]);
         },
         'viewOptions'=>['role'=>'modal-remote','title'=>'View','data-toggle'=>'tooltip'],
         'updateOptions'=>['role'=>'modal-remote','title'=>'Update', 'data-toggle'=>'tooltip'],

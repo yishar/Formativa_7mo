@@ -1,16 +1,16 @@
 <?php
 
-namespace common\searchs;
+namespace frontend\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\CoordinadorSocial;
+use common\models\Actividad;
 
 /**
- * CoordinadorSocialSearch represents the model behind the search form about `common\models\CoordinadorSocial`.
+ * ActividadSearch represents the model behind the search form about `common\models\Actividad`.
  */
-class CoordinadorSocialSearch extends CoordinadorSocial
+class ActividadSearch extends Actividad
 {
     /**
      * @inheritdoc
@@ -18,7 +18,8 @@ class CoordinadorSocialSearch extends CoordinadorSocial
     public function rules()
     {
         return [
-            [['CedulaCoordi', 'Nombre', 'Apellido'], 'safe'],
+            [['Nombre', 'Lugar', 'Fecha_inicio', 'Fecha_fin', 'CedulaCoordi'], 'safe'],
+            [['Id_actividad'], 'integer'],
         ];
     }
 
@@ -40,7 +41,7 @@ class CoordinadorSocialSearch extends CoordinadorSocial
      */
     public function search($params)
     {
-        $query = CoordinadorSocial::find();
+        $query = Actividad::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -54,9 +55,15 @@ class CoordinadorSocialSearch extends CoordinadorSocial
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['like', 'CedulaCoordi', $this->CedulaCoordi])
-            ->andFilterWhere(['like', 'Nombre', $this->Nombre])
-            ->andFilterWhere(['like', 'Apellido', $this->Apellido]);
+        $query->andFilterWhere([
+            'Fecha_inicio' => $this->Fecha_inicio,
+            'Fecha_fin' => $this->Fecha_fin,
+            'Id_actividad' => $this->Id_actividad,
+        ]);
+
+        $query->andFilterWhere(['like', 'Nombre', $this->Nombre])
+            ->andFilterWhere(['like', 'Lugar', $this->Lugar])
+            ->andFilterWhere(['like', 'CedulaCoordi', $this->CedulaCoordi]);
 
         return $dataProvider;
     }

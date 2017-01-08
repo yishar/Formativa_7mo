@@ -4,7 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\Actividad;
-use common\searchs\ActividadSearch;
+use frontend\models\ActividadSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -50,26 +50,25 @@ class ActividadController extends Controller
 
     /**
      * Displays a single Actividad model.
-     * @param integer $Id_actividad
-     * @param string $CedulaCoordi
+     * @param integer $id
      * @return mixed
      */
-    public function actionView($Id_actividad, $CedulaCoordi)
+    public function actionView($id)
     {   
         $request = Yii::$app->request;
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                    'title'=> "Actividad #".$Id_actividad, $CedulaCoordi,
+                    'title'=> "Actividad #".$id,
                     'content'=>$this->renderAjax('view', [
-                        'model' => $this->findModel($Id_actividad, $CedulaCoordi),
+                        'model' => $this->findModel($id),
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Edit',['update','Id_actividad, $CedulaCoordi'=>$Id_actividad, $CedulaCoordi],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
                 ];    
         }else{
             return $this->render('view', [
-                'model' => $this->findModel($Id_actividad, $CedulaCoordi),
+                'model' => $this->findModel($id),
             ]);
         }
     }
@@ -125,7 +124,7 @@ class ActividadController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'Id_actividad' => $model->Id_actividad, 'CedulaCoordi' => $model->CedulaCoordi]);
+                return $this->redirect(['view', 'id' => $model->Id_actividad]);
             } else {
                 return $this->render('create', [
                     'model' => $model,
@@ -139,14 +138,13 @@ class ActividadController extends Controller
      * Updates an existing Actividad model.
      * For ajax request will return json object
      * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $Id_actividad
-     * @param string $CedulaCoordi
+     * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($Id_actividad, $CedulaCoordi)
+    public function actionUpdate($id)
     {
         $request = Yii::$app->request;
-        $model = $this->findModel($Id_actividad, $CedulaCoordi);       
+        $model = $this->findModel($id);       
 
         if($request->isAjax){
             /*
@@ -155,7 +153,7 @@ class ActividadController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Update Actividad #".$Id_actividad, $CedulaCoordi,
+                    'title'=> "Update Actividad #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -165,16 +163,16 @@ class ActividadController extends Controller
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Actividad #".$Id_actividad, $CedulaCoordi,
+                    'title'=> "Actividad #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $model,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Edit',['update','Id_actividad, $CedulaCoordi'=>$Id_actividad, $CedulaCoordi],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
                 ];    
             }else{
                  return [
-                    'title'=> "Update Actividad #".$Id_actividad, $CedulaCoordi,
+                    'title'=> "Update Actividad #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -187,7 +185,7 @@ class ActividadController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'Id_actividad' => $model->Id_actividad, 'CedulaCoordi' => $model->CedulaCoordi]);
+                return $this->redirect(['view', 'id' => $model->Id_actividad]);
             } else {
                 return $this->render('update', [
                     'model' => $model,
@@ -200,14 +198,13 @@ class ActividadController extends Controller
      * Delete an existing Actividad model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $Id_actividad
-     * @param string $CedulaCoordi
+     * @param integer $id
      * @return mixed
      */
-    public function actionDelete($Id_actividad, $CedulaCoordi)
+    public function actionDelete($id)
     {
         $request = Yii::$app->request;
-        $this->findModel($Id_actividad, $CedulaCoordi)->delete();
+        $this->findModel($id)->delete();
 
         if($request->isAjax){
             /*
@@ -229,8 +226,7 @@ class ActividadController extends Controller
      * Delete multiple existing Actividad model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $Id_actividad
-     * @param string $CedulaCoordi
+     * @param integer $id
      * @return mixed
      */
     public function actionBulkDelete()
@@ -260,14 +256,13 @@ class ActividadController extends Controller
     /**
      * Finds the Actividad model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $Id_actividad
-     * @param string $CedulaCoordi
+     * @param integer $id
      * @return Actividad the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($Id_actividad, $CedulaCoordi)
+    protected function findModel($id)
     {
-        if (($model = Actividad::findOne(['Id_actividad' => $Id_actividad, 'CedulaCoordi' => $CedulaCoordi])) !== null) {
+        if (($model = Actividad::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

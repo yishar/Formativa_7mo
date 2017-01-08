@@ -4,7 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\CoordinadorSocial;
-use common\searchs\CoordinadorSocialSearch;
+use frontend\models\CoordinadorSocialSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

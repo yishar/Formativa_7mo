@@ -10,9 +10,9 @@ use yii\widgets\DetailView;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
+            'Id_labor_social',
             'Cedula',
             'Id_actividad',
-            'CedulaCoordi',
             'N_horas',
         ],
     ]) ?>

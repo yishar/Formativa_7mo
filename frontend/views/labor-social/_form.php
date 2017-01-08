@@ -11,11 +11,25 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'Cedula')->textInput(['maxlength' => true]) ?>
+     <!-- Hacer mapeo de todos los estudiantes -->
+        <?php echo $form->field($model, 'Cedula')->widget(kartik\select2\Select2::classname(), [
+        'data' => yii\helpers\ArrayHelper::map(common\models\Estudiante::find()->all(), 'Cedula', 'Nombre'),
+        'options' => ['placeholder' => 'Seleccione un estudiante ...'],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+        ]);
+        ?>
 
-    <?= $form->field($model, 'Id_actividad')->textInput() ?>
-
-    <?= $form->field($model, 'CedulaCoordi')->textInput(['maxlength' => true]) ?>
+        <!-- Hacer mapeo de todas las actividades  -->
+        <?php echo $form->field($model, 'Id_actividad')->widget(kartik\select2\Select2::classname(), [
+        'data' => yii\helpers\ArrayHelper::map(common\models\Actividad::find()->all(), 'Id_actividad', 'Nombre'),
+        'options' => ['placeholder' => 'Seleccione una actividad ...'],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+        ]);
+        ?>
 
     <?= $form->field($model, 'N_horas')->textInput(['maxlength' => true]) ?>
 

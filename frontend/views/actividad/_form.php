@@ -15,11 +15,32 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Lugar')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'Fecha_inicio')->textInput() ?>
+    
+    <?php // Usage with model and Active Form (with no default initial value)
+echo $form->field($model, 'Fecha_inicio')->widget(\kartik\datetime\DateTimePicker::classname(), [
+	'options' => ['placeholder' => 'Enter event time ...'],
+	'pluginOptions' => [
+		'autoclose' => true
+	]
+]); ?>
 
-    <?= $form->field($model, 'Fecha_fin')->textInput() ?>
+    <?php // Usage with model and Active Form (with no default initial value)
+echo $form->field($model, 'Fecha_fin')->widget(\kartik\datetime\DateTimePicker::classname(), [
+	'options' => ['placeholder' => 'Enter event time ...'],
+	'pluginOptions' => [
+		'autoclose' => true
+	]
+]); ?>
 
-    <?= $form->field($model, 'CedulaCoordi')->textInput(['maxlength' => true]) ?>
+    <!-- Hacer mapeo de todos los coordinadores  -->
+        <?php echo $form->field($model, 'CedulaCoordi')->widget(kartik\select2\Select2::classname(), [
+        'data' => yii\helpers\ArrayHelper::map(common\models\CoordinadorSocial::find()->all(), 'CedulaCoordi', 'Nombre'),
+        'options' => ['placeholder' => 'Seleccione un coordinador ...'],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+        ]);
+        ?>
 
   
 	<?php if (!Yii::$app->request->isAjax){ ?>
