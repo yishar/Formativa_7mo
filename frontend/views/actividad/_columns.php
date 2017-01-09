@@ -26,10 +26,10 @@ return [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Fecha_fin',
     ],
-    [
+    /*[
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Id_actividad',
-    ],
+    ],*/
     // [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'CedulaCoordi',

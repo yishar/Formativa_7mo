@@ -45,9 +45,9 @@ class LaborSocial extends \yii\db\ActiveRecord
     {
         return [
             'Id_labor_social' => 'Id Labor Social',
-            'Cedula' => 'Cedula',
-            'Id_actividad' => 'Id Actividad',
-            'N_horas' => 'N Horas',
+            'Cedula' => 'Estudiante',
+            'Id_actividad' => 'Actividad',
+            'N_horas' => 'N° Horas realizadas',
         ];
     }
 

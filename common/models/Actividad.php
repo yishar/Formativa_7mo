@@ -47,12 +47,12 @@ class Actividad extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Nombre' => 'Nombre',
+            'Nombre' => 'Actividad',
             'Lugar' => 'Lugar',
             'Fecha_inicio' => 'Fecha Inicio',
-            'Fecha_fin' => 'Fecha Fin',
+            'Fecha_fin' => 'Fecha Finalización',
             'Id_actividad' => 'Id Actividad',
-            'CedulaCoordi' => 'Cedula Coordi',
+            'CedulaCoordi' => 'CI. Coordinador',
         ];
     }
 

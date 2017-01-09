@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
 
     <!-- Hacer mapeo de todos los estudiantes  -->
         <?php echo $form->field($model, 'Cedula')->widget(kartik\select2\Select2::classname(), [
-        'data' => \yii\helpers\ArrayHelper::getColumn($data, 'Cedula'),
+        'data' => \yii\helpers\ArrayHelper::map($data, 'Cedula', 'Nombre'),
         'options' => ['placeholder' => 'Seleccione un estudiante ...'],
         'pluginOptions' => [
             'allowClear' => true

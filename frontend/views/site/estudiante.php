@@ -13,19 +13,22 @@ use yii\grid\GridView;
 <table border="1">
     <thead>
         <tr>
-            <th>CEDULA</th>
-            <th>NOMBRE</th>
-            <th>APELLIDO</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($data as $key => $value):         ?> 
+            <th>Cédula</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>N° Matrícula</th>
+            <th>Carrera</th>
+            <th>Nivel</th>
+        </tr>       <?php foreach ($data as $key => $value):         ?> 
         <tr>
 
             
             <td><?=$value['Cedula']?></td>
             <td><?=$value['Nombre']?></td>
             <td><?=$value['Apellido']?></td>
+            <td><?=$value['N_matricula']?></td>
+            <td><?=$value['Carrera']?></td>
+            <td><?=$value['Nivel']?></td>
          
         </tr>
            <?php            endforeach; ?>

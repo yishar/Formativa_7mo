@@ -101,12 +101,7 @@ class LaborSocialController extends Controller
 //                    'Cedula' => $value['Cedula'],
 //                ] ;
 //            }
-        
-        
-            
-          
-            
-        
+
 
         if($request->isAjax){
             /*
@@ -130,7 +125,7 @@ class LaborSocialController extends Controller
                     'title'=> "Create new LaborSocial",
                     'content'=>'<span class="text-success">Create LaborSocial success</span>',
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                            Html::a('Crear Mas',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
         
                 ];         
             }else{           
@@ -138,7 +133,7 @@ class LaborSocialController extends Controller
                     'title'=> "Create new LaborSocial",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
-                        //'data' => $data,
+                        'data' => $data,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
