@@ -10,5 +10,6 @@ use yii\helpers\Html;
 <div class="labor-social-create">
     <?= $this->render('_form', [
         'model' => $model,
+        'data' => $data,
     ]) ?>
 </div>

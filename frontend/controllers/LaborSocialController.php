@@ -83,6 +83,30 @@ class LaborSocialController extends Controller
     {
         $request = Yii::$app->request;
         $model = new LaborSocial();  
+        
+        $api = new \RestClient(
+                 [
+                     'base_url' =>'http://localhost/servicio_estudiantes/frontend/web/index.php/api?',
+                     'headers' => [
+                              'Accept' =>'application/json'
+                     ]
+                 ]
+                 );
+         $result = $api->get('/default');
+        $data = \yii\helpers\Json::decode($result->response);
+                   
+//        $cedula =[];
+//            foreach ($data as $key => $value) {
+//                $cedula[] = [
+//                    'Cedula' => $value['Cedula'],
+//                ] ;
+//            }
+        
+        
+            
+          
+            
+        
 
         if($request->isAjax){
             /*
@@ -94,6 +118,7 @@ class LaborSocialController extends Controller
                     'title'=> "Create new LaborSocial",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
+                        'data' => $data,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
@@ -113,6 +138,7 @@ class LaborSocialController extends Controller
                     'title'=> "Create new LaborSocial",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
+                        //'data' => $data,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])

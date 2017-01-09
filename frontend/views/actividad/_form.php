@@ -14,9 +14,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'Nombre')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'Lugar')->textInput(['maxlength' => true]) ?>
-
     
-    <?php // Usage with model and Active Form (with no default initial value)
+     <?php // Usage with model and Active Form (with no default initial value)
 echo $form->field($model, 'Fecha_inicio')->widget(\kartik\datetime\DateTimePicker::classname(), [
 	'options' => ['placeholder' => 'Enter event time ...'],
 	'pluginOptions' => [

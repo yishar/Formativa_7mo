@@ -12,7 +12,6 @@ use Yii;
  * @property integer $Id_actividad
  * @property string $N_horas
  *
- * @property Estudiante $cedula
  * @property Actividad $idActividad
  */
 class LaborSocial extends \yii\db\ActiveRecord
@@ -35,7 +34,6 @@ class LaborSocial extends \yii\db\ActiveRecord
             [['Id_actividad'], 'integer'],
             [['Cedula'], 'string', 'max' => 10],
             [['N_horas'], 'string', 'max' => 40],
-            [['Cedula'], 'exist', 'skipOnError' => true, 'targetClass' => Estudiante::className(), 'targetAttribute' => ['Cedula' => 'Cedula']],
             [['Id_actividad'], 'exist', 'skipOnError' => true, 'targetClass' => Actividad::className(), 'targetAttribute' => ['Id_actividad' => 'Id_actividad']],
         ];
     }
@@ -47,18 +45,10 @@ class LaborSocial extends \yii\db\ActiveRecord
     {
         return [
             'Id_labor_social' => 'Id Labor Social',
-            'Cedula' => 'Estudiante',
-            'Id_actividad' => 'Actividad',
-            'N_horas' => 'N° Horas Realizadas',
+            'Cedula' => 'Cedula',
+            'Id_actividad' => 'Id Actividad',
+            'N_horas' => 'N Horas',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCedula()
-    {
-        return $this->hasOne(Estudiante::className(), ['Cedula' => 'Cedula']);
     }
 
     /**

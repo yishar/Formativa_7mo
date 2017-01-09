@@ -87,6 +87,76 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
+    
+    
+    
+     public function actionEstudiante()
+    {
+         $api = new \RestClient(
+                 [
+                     'base_url' =>'http://localhost/servicio_estudiantes/frontend/web/index.php/api?',
+                     'headers' => [
+                              'Accept' =>'application/json'
+                     ]
+                 ]
+                 );
+         $result = $api->get('/default');
+        $data = \yii\helpers\Json::decode($result->response);
+        
+
+        
+//$resultData = [
+//    '4' => [
+//        'id'          => 4,
+//        'key'         => 'dictionary_email',
+//        'value'       => 'Email',
+//        'description' => '//email comment'
+//    ],
+//    '5' => [
+//        'id'          => 5,
+//        'key'         => 'dictionary_username',
+//        'value'       => 'Name',
+//        'description' => '//name comment'
+//    ],
+//    '6' => [
+//        'id'          => 6,
+//        'key'         => 'dictionary_new-password',
+//        'value'       => 'New password',
+//        'description' => '//new password comment'
+//    ],
+//    '7' => [
+//        'id'          => 7,
+//        'key'         => 'dictionary_current-password',
+//        'value'       => 'Current password',
+//        'description' => '//current password'
+//    ],
+//];        
+        
+              //  $query = Actividad::find();
+
+//        $dataProvider = new \yii\data\ActiveDataProvider([
+//            'query' => $resultData,
+//            
+//            //'totalCount' => 3,
+//        ]);
+        
+        
+//        $arr=[];
+//        
+//        foreach ($data as $key => $value) {
+//            $arr[]=['Cedula'=>$value['Cedula'], 'Nombre'=>$value['Nombre'], 'Apellido'=>$value['Apellido']];
+//        }
+
+        // add conditions that should always apply here
+
+   
+                 
+        return $this->render('estudiante',[
+            //'query' => $data,
+                        //'dataProvider' => $dataProvider,
+            'data' => $data,
+        ]);
+    }
 
     /**
      * Logs out the current user.

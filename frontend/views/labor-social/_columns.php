@@ -10,21 +10,18 @@ return [
         'class' => 'kartik\grid\SerialColumn',
         'width' => '30px',
     ],
-     /*   [
+        [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Id_labor_social',
-    ],*/
+    ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Cedula',
-        'value'=>  function($model, $key,$index,$column){
-                   return  $model->cedula->Nombre.' '.$model->cedula->Apellido ;   
-         } ,
     ],
-    /*[
+    [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Id_actividad',
-    */
+    ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'N_horas',
