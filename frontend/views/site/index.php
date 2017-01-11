@@ -10,6 +10,7 @@ $this->title = 'Home';
         <h1>PUCESE</h1>
 
         <p class="lead">SisHNA</p>
+        <p class="lead">Bienvenidos al sistema de registro de horas no académicas</p>
 
   
     </div>
