@@ -18,6 +18,8 @@ use yii\data\ArrayDataProvider;
 use yii\httpclient\Client;
 use yii\helpers\Json;
 
+use frontend\models\LaborSocialSearch;
+
 /**
  * Site controller
  */
@@ -108,6 +110,7 @@ class SiteController extends Controller
          $result = $api->get('/default');
         $data = \yii\helpers\Json::decode($result->response);
         
+       
         $dataProvider = new ArrayDataProvider([
             'allModels' => $data,
             'pagination' => [
@@ -167,6 +170,7 @@ class SiteController extends Controller
             //'query' => $data,
              'dataProvider' => $dataProvider,
             'data' => $data,
+            
         ]);
     }
 

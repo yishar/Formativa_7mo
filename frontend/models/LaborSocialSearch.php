@@ -65,4 +65,5 @@ class LaborSocialSearch extends LaborSocial
 
         return $dataProvider;
     }
+    
 }
