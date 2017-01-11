@@ -28,7 +28,7 @@ use yii\grid\GridView;
            // 'summary'=>''
     ]); ?>
     </div>
-<h6>Hello world</h6>
+<h6>Hello world!</h6>
 <!--
 <table border="1">
     <thead>
