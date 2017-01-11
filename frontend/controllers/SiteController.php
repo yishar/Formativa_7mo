@@ -13,6 +13,11 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 
+//Añadido
+use yii\data\ArrayDataProvider;
+use yii\httpclient\Client;
+use yii\helpers\Json;
+
 /**
  * Site controller
  */
@@ -103,6 +108,13 @@ class SiteController extends Controller
          $result = $api->get('/default');
         $data = \yii\helpers\Json::decode($result->response);
         
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $data,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);
+        
 
         
 //$resultData = [
@@ -153,7 +165,7 @@ class SiteController extends Controller
                  
         return $this->render('estudiante',[
             //'query' => $data,
-                        //'dataProvider' => $dataProvider,
+             'dataProvider' => $dataProvider,
             'data' => $data,
         ]);
     }
