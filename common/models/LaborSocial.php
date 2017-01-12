@@ -30,10 +30,10 @@ class LaborSocial extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Cedula', 'Id_actividad'], 'required'],
+            [['Cedula', 'Id_actividad'], 'required', 'message' => 'Llene todos los datos necesarios'],
             [['Id_actividad'], 'integer'],
             [['Cedula'], 'string', 'max' => 10],
-            [['N_horas'], 'string', 'max' => 40],
+            [['N_horas'], 'integer', 'max' => 700, 'message' => 'El n° de horas realizadas no puede ser superior a 700', 'integerOnly'=>true, 'message' => 'Las horas solo pueden ser valores enteros y no mayor a 1000'],
             [['Id_actividad'], 'exist', 'skipOnError' => true, 'targetClass' => Actividad::className(), 'targetAttribute' => ['Id_actividad' => 'Id_actividad']],
         ];
     }
@@ -45,8 +45,8 @@ class LaborSocial extends \yii\db\ActiveRecord
     {
         return [
             'Id_labor_social' => 'Id Labor Social',
-            'Cedula' => 'Estudiante',
-            'Id_actividad' => 'Actividad',
+            'Cedula' => 'Estudiante *',
+            'Id_actividad' => 'Actividad *',
             'N_horas' => 'N° Horas realizadas',
         ];
     }

@@ -22,31 +22,31 @@ class LaborSocialController extends Controller
     public function behaviors()
     {
         return [
-                'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                [
-                        'actions' => ['logout', 'index', 'create', 'update', 'view', ],
-                        'allow' => true,
-                        'roles' => ['AdministradorLaborSocial'],
-                ],
-                [
-                        'actions' => ['index', 'create', 'update', 'view', ],
-                        'allow' => false,
-                        'roles' => ['AdministradorPracticasPre-Profesionales'],
-                ],
-                [
-                        'actions' => ['index', 'create', 'update', 'view', ],
-                        'allow' => false,
-                        'roles' => ['AdministradorSecreteria'],
-                ],
-               [
-                        'actions' => ['logout', 'index', 'create', 'update', 'view', ],
-                        'allow' => true,
-                        'roles' => ['admin'],
-                ],
-                    ],
-                     ],
+//                'access' => [
+//                'class' => AccessControl::className(),
+//                'rules' => [
+//                [
+//                        'actions' => ['logout', 'index', 'create', 'update', 'view', ],
+//                        'allow' => true,
+//                        'roles' => ['AdministradorLaborSocial'],
+//                ],
+//                [
+//                        'actions' => ['index', 'create', 'update', 'view', ],
+//                        'allow' => false,
+//                        'roles' => ['AdministradorPracticasPre-Profesionales'],
+//                ],
+//                [
+//                        'actions' => ['index', 'create', 'update', 'view', ],
+//                        'allow' => false,
+//                        'roles' => ['AdministradorSecreteria'],
+//                ],
+//               [
+//                        'actions' => ['logout', 'index', 'create', 'update', 'view', ],
+//                        'allow' => true,
+//                        'roles' => ['superadmin'],
+//                ],
+//                    ],
+//                     ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -107,6 +107,7 @@ class LaborSocialController extends Controller
      */
     public function actionCreate()
     {
+        //Tomar los estudiantes desde el servicio
         $request = Yii::$app->request;
         $model = new LaborSocial();  
         
@@ -121,14 +122,7 @@ class LaborSocialController extends Controller
          $result = $api->get('/default');
         $data = \yii\helpers\Json::decode($result->response);
        
-                   
-//        $cedula =[];
-//            foreach ($data as $key => $value) {
-//                $cedula[] = [
-//                    'Cedula' => $value['Cedula'],
-//                ] ;
-//            }
-
+                  
 
         if($request->isAjax){
             /*

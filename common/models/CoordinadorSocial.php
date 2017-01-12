@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\base\model;
 
 /**
  * This is the model class for table "coordinador_social".
@@ -29,9 +30,9 @@ class CoordinadorSocial extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['CedulaCoordi'], 'required'],
+            [['CedulaCoordi'], 'required', 'message' => 'Ingrese la cédula del coordinador'],
             [['CedulaCoordi'], 'string', 'max' => 10],
-            [['Nombre', 'Apellido'], 'string', 'max' => 40],
+            [['Nombre', 'Apellido'], 'string', 'max' => 40, 'message' => 'Sólo se aceptan letras'],
         ];
     }
 

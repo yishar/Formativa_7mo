@@ -31,6 +31,7 @@ use yii\widgets\ActiveForm;
         ]);
         ?>
 
+        
     <?= $form->field($model, 'N_horas')->textInput(['maxlength' => true]) ?>
 
   
@@ -39,6 +40,7 @@ use yii\widgets\ActiveForm;
 	        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 	    </div>
 	<?php } ?>
+
 
     <?php ActiveForm::end(); ?>
     

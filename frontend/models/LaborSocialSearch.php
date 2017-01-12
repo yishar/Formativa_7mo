@@ -19,7 +19,8 @@ class LaborSocialSearch extends LaborSocial
     {
         return [
             [['Id_labor_social', 'Id_actividad'], 'integer'],
-            [['Cedula', 'N_horas'], 'safe'],
+            [['N_horas'], 'integer'],
+            [['Cedula'], 'safe'],
         ];
     }
 
