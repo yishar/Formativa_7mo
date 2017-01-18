@@ -19,13 +19,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Gerente')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'Nombre_contacto')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'Apellido_contacto')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'Contacto')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'Cargo_contacto')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'Telefono_contacto')->textInput() ?>
+
+    
+    <?= $form->field($model, 'Convenio')->radioList(['Si' => 'Si', 'No' => 'No', ])?>
+    <?php //echo $form->field($model, 'Convenio')->dropDownList([ 'Si' => 'Si', 'No' => 'No', ], ['prompt' => 'Existe convenio?']) ?>
 
   
 	<?php if (!Yii::$app->request->isAjax){ ?>

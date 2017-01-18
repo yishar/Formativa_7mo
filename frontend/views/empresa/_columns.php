@@ -28,12 +28,8 @@ return [
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'Nombre_contacto',
+        'attribute'=>'Contacto',
     ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'Apellido_contacto',
-    // ],
     // [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'Cargo_contacto',
@@ -45,6 +41,10 @@ return [
     // [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'Id_empresa',
+    // ],
+    // [
+        // 'class'=>'\kartik\grid\DataColumn',
+        // 'attribute'=>'Convenio',
     // ],
     [
         'class' => 'kartik\grid\ActionColumn',

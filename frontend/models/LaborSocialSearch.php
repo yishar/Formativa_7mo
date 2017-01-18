@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\LaborSocial;
+use common\models\Actividad;
 
 /**
  * LaborSocialSearch represents the model behind the search form about `common\models\LaborSocial`.
@@ -55,6 +56,7 @@ class LaborSocialSearch extends LaborSocial
             // $query->where('0=1');
             return $dataProvider;
         }
+        
 
         $query->andFilterWhere([
             'Id_labor_social' => $this->Id_labor_social,

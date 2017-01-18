@@ -48,7 +48,6 @@ AppAsset::register($this);
                 $menuItems = [
                     ['label' => 'Inicio', 'url' => ['/site/index']],
                     ['label' => 'Estudiantes', 'url' => ['/site/estudiante']],
-                    ['label' => 'Matriculas', 'url' => ['/matricula']],
 //                ['label' => 'Coordinadores', 'url' => ['/coordinador-social']],
 //                ['label' => 'Labor Social', 'url' => ['/labor-social']],
                    // ['label' => 'BACKEND', 'url' => '../../backend/web','visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin'),],

@@ -64,6 +64,7 @@ class LaborSocialController extends Controller
      */
     public function actionIndex()
     {    
+        
         $searchModel = new LaborSocialSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -152,7 +153,7 @@ class LaborSocialController extends Controller
                 ];         
             }else{           
                 return [
-                    'title'=> "Create new LaborSocial",
+                    'title'=> "Crear nueva Labor Social",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                         'data' => $data,

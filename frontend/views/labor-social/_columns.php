@@ -1,5 +1,8 @@
 <?php
 use yii\helpers\Url;
+//use frontend\models\ActividadSearch;
+//use common\models\Actividad;
+
 
 return [
     [
@@ -17,13 +20,16 @@ return [
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Cedula',
+        /*'value'=>  function($model, $key,$index,$column){
+                   return  $model->Cedula->Nombre.' '.$model->Cedula->Apellido ;   
+         },*/
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Id_actividad',
-        /*'value'=>  function($model, $key,$index,$column){
-                   return  $model->Id_actividad->Nombre;   
-         },*/
+        'value'=> function($model, $key,$index,$column){
+                   return  $model->idActividad->Nombre;   
+         },
     ],
     [
         'class'=>'\kartik\grid\DataColumn',

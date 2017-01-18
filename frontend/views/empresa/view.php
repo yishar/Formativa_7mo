@@ -14,11 +14,11 @@ use yii\widgets\DetailView;
             'Direccion',
             'Telefono',
             'Gerente',
-            'Nombre_contacto',
-            'Apellido_contacto',
+            'Contacto',
             'Cargo_contacto',
             'Telefono_contacto',
             'Id_empresa',
+            'Convenio',
         ],
     ]) ?>
 

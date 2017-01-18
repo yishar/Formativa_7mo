@@ -12,7 +12,6 @@ use yii\widgets\DetailView;
         'attributes' => [
             'Id_pre_profesionales',
             'N_Matricula',
-            'Cedula',
             'Id_empresa',
             'N_Horas',
         ],

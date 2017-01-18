@@ -11,11 +11,11 @@ use Yii;
  * @property string $Direccion
  * @property integer $Telefono
  * @property string $Gerente
- * @property string $Nombre_contacto
- * @property string $Apellido_contacto
+ * @property string $Contacto
  * @property string $Cargo_contacto
  * @property integer $Telefono_contacto
  * @property integer $Id_empresa
+ * @property string $Convenio
  *
  * @property PreProfesionales[] $preProfesionales
  */
@@ -36,8 +36,11 @@ class Empresa extends \yii\db\ActiveRecord
     {
         return [
             [['Telefono', 'Telefono_contacto'], 'integer'],
-            [['Nombre', 'Gerente', 'Nombre_contacto', 'Apellido_contacto', 'Cargo_contacto'], 'string', 'max' => 40],
+            [['Convenio'], 'required'],
+            [['Convenio'], 'string'],
+            [['Nombre', 'Gerente', 'Cargo_contacto'], 'string', 'max' => 40],
             [['Direccion'], 'string', 'max' => 60],
+            [['Contacto'], 'string', 'max' => 50],
         ];
     }
 
@@ -47,15 +50,15 @@ class Empresa extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Nombre' => 'Nombre',
-            'Direccion' => 'Direccion',
-            'Telefono' => 'Telefono',
+            'Nombre' => 'Empresa o Razón social',
+            'Direccion' => 'Dirección',
+            'Telefono' => 'Teléfono de referencia',
             'Gerente' => 'Gerente',
-            'Nombre_contacto' => 'Nombre Contacto',
-            'Apellido_contacto' => 'Apellido Contacto',
-            'Cargo_contacto' => 'Cargo Contacto',
-            'Telefono_contacto' => 'Telefono Contacto',
+            'Contacto' => 'Contacto',
+            'Cargo_contacto' => 'Cargo del contacto',
+            'Telefono_contacto' => 'Teléfono del contacto',
             'Id_empresa' => 'Id Empresa',
+            'Convenio' => 'Existe convenio',
         ];
     }
 

@@ -13,8 +13,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'N_Matricula')->textInput() ?>
 
-    <?= $form->field($model, 'Cedula')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'Id_empresa')->textInput() ?>
 
     <?= $form->field($model, 'N_Horas')->textInput() ?>

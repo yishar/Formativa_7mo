@@ -19,7 +19,6 @@ class PreProfesionalesSearch extends PreProfesionales
     {
         return [
             [['Id_pre_profesionales', 'N_Matricula', 'Id_empresa', 'N_Horas'], 'integer'],
-            [['Cedula'], 'safe'],
         ];
     }
 
@@ -61,8 +60,6 @@ class PreProfesionalesSearch extends PreProfesionales
             'Id_empresa' => $this->Id_empresa,
             'N_Horas' => $this->N_Horas,
         ]);
-
-        $query->andFilterWhere(['like', 'Cedula', $this->Cedula]);
 
         return $dataProvider;
     }

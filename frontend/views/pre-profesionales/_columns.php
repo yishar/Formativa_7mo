@@ -20,10 +20,6 @@ return [
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'Cedula',
-    ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Id_empresa',
     ],
     [

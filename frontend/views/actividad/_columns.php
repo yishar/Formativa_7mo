@@ -30,10 +30,13 @@ return [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Id_actividad',
     ],*/
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'CedulaCoordi',
-    // ],
+    [
+         'class'=>'\kartik\grid\DataColumn',
+         'attribute'=>'CedulaCoordi',
+        'value' => function($model, $key,$index,$column){
+                   return  $model->cedulaCoordi->Nombre.' '.$model->cedulaCoordi->Apellido;   
+         },
+    ],
     [
         'class' => 'kartik\grid\ActionColumn',
         'dropdown' => false,

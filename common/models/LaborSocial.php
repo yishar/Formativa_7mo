@@ -58,4 +58,5 @@ class LaborSocial extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Actividad::className(), ['Id_actividad' => 'Id_actividad']);
     }
+
 }
