@@ -35,7 +35,7 @@ class Empresa extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Telefono', 'Telefono_contacto'], 'integer'],
+            [['Telefono', 'Telefono_contacto'], 'integer', 'max' => 10],
             [['Convenio'], 'required'],
             [['Convenio'], 'string'],
             [['archivo'], 'file', 'extensions' => 'pdf'], // AÑADIENDO AQUI LAS EXTENSIONES DA UN ERROR 
