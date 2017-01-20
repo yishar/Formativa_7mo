@@ -14,6 +14,8 @@ use yii\widgets\DetailView;
             'N_Matricula',
             'Id_empresa',
             'N_Horas',
+            'Fecha_inicio',
+            'Fecha_fin',
         ],
     ]) ?>
 

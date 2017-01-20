@@ -23,7 +23,9 @@
         "johnitvn/yii2-ajaxcrud": "*",
         "bedezign/yii2-audit": "^1.0",
         "kartik-v/yii2-widget-datetimepicker": "*",
-        "tcdent/php-restclient": "^0.1.5"
+        "tcdent/php-restclient": "^0.1.5",
+        "kartik-v/bootstrap-fileinput": "@dev",
+        "kartik-v/yii2-widget-fileinput": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

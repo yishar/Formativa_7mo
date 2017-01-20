@@ -18,6 +18,7 @@ class PreProfesionalesSearch extends PreProfesionales
     public function rules()
     {
         return [
+            [['Fecha_inicio', 'Fecha_fin'], 'safe'],
             [['Id_pre_profesionales', 'N_Matricula', 'Id_empresa', 'N_Horas'], 'integer'],
         ];
     }
@@ -59,6 +60,8 @@ class PreProfesionalesSearch extends PreProfesionales
             'N_Matricula' => $this->N_Matricula,
             'Id_empresa' => $this->Id_empresa,
             'N_Horas' => $this->N_Horas,
+            'Fecha_inicio' => $this->Fecha_inicio,
+            'Fecha_fin' => $this->Fecha_fin,
         ]);
 
         return $dataProvider;

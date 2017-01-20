@@ -48,6 +48,8 @@ class LaborSocial extends \yii\db\ActiveRecord
             'Cedula' => 'Estudiante *',
             'Id_actividad' => 'Actividad *',
             'N_horas' => 'N° Horas realizadas',
+            'Fecha_inicio' => 'Fecha inicio',
+            'Fecha_fin' => 'Fecha finalización',
         ];
     }
 

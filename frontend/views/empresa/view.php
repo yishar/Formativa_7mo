@@ -19,6 +19,7 @@ use yii\widgets\DetailView;
             'Telefono_contacto',
             'Id_empresa',
             'Convenio',
+            'archivo',
         ],
     ]) ?>
 

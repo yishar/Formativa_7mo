@@ -42,10 +42,14 @@ return [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'Id_empresa',
     // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'Convenio',
-    // ],
+     [
+         'class'=>'\kartik\grid\DataColumn',
+         'attribute'=>'Convenio',
+     ],
+    [
+         'class'=>'\kartik\grid\DataColumn',
+         'attribute'=>'archivo',
+     ],
     [
         'class' => 'kartik\grid\ActionColumn',
         'dropdown' => false,

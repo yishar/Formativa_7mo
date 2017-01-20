@@ -14,6 +14,22 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'N_Matricula')->textInput() ?>
 
     <?= $form->field($model, 'Id_empresa')->textInput() ?>
+    
+    <?php // Usage with model and Active Form (with no default initial value)
+        echo $form->field($model, 'Fecha_inicio')->widget(\kartik\datetime\DateTimePicker::classname(), [
+	'options' => ['placeholder' => 'Elija la fecha ...'],
+	'pluginOptions' => [
+		'autoclose' => true
+	]
+        ]); ?>
+        
+         <?php // Usage with model and Active Form (with no default initial value)
+        echo $form->field($model, 'Fecha_fin')->widget(\kartik\datetime\DateTimePicker::classname(), [
+	'options' => ['placeholder' => 'Elija la fecha ...'],
+	'pluginOptions' => [
+		'autoclose' => true
+	]
+        ]); ?>
 
     <?= $form->field($model, 'N_Horas')->textInput() ?>
 

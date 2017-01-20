@@ -10,17 +10,29 @@ return [
         'class' => 'kartik\grid\SerialColumn',
         'width' => '30px',
     ],
-        [
+    /*[
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Id_pre_profesionales',
-    ],
+    ],*/
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'N_Matricula',
+       
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Id_empresa',
+        'value'=> function($model, $key,$index,$column){
+                   return  $model->idEmpresa->Nombre;   
+         },
+    ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'Fecha_inicio',
+    ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'Fecha_fin',
     ],
     [
         'class'=>'\kartik\grid\DataColumn',

@@ -18,7 +18,7 @@ class EmpresaSearch extends Empresa
     public function rules()
     {
         return [
-            [['Nombre', 'Direccion', 'Gerente', 'Contacto', 'Cargo_contacto', 'Convenio'], 'safe'],
+            [['Nombre', 'Direccion', 'Gerente', 'Contacto', 'Cargo_contacto', 'Convenio', 'archivo'], 'safe'],
             [['Telefono', 'Telefono_contacto', 'Id_empresa'], 'integer'],
         ];
     }
@@ -66,7 +66,8 @@ class EmpresaSearch extends Empresa
             ->andFilterWhere(['like', 'Gerente', $this->Gerente])
             ->andFilterWhere(['like', 'Contacto', $this->Contacto])
             ->andFilterWhere(['like', 'Cargo_contacto', $this->Cargo_contacto])
-            ->andFilterWhere(['like', 'Convenio', $this->Convenio]);
+            ->andFilterWhere(['like', 'Convenio', $this->Convenio])
+            ->andFilterWhere(['like', 'archivo', $this->archivo]);
 
         return $dataProvider;
     }

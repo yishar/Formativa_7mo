@@ -30,6 +30,7 @@ class PreProfesionales extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['Fecha_inicio', 'Fecha_fin'], 'safe'],
             [['N_Matricula', 'Id_empresa'], 'required'],
             [['N_Matricula', 'Id_empresa', 'N_Horas'], 'integer'],
             [['Id_empresa'], 'exist', 'skipOnError' => true, 'targetClass' => Empresa::className(), 'targetAttribute' => ['Id_empresa' => 'Id_empresa']],
@@ -56,4 +57,5 @@ class PreProfesionales extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Empresa::className(), ['Id_empresa' => 'Id_empresa']);
     }
+    
 }
