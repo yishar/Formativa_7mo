@@ -27,7 +27,7 @@ AppAsset::register($this);
         <div class="wrap">
             <?php
             NavBar::begin([
-                'brandLabel' => 'App',
+                'brandLabel' => Html::img('../assets/logo-puce-2016-bg-02.jpg', ['alt'=>Yii::$app->name,'width'=>200,'height'=>60]),
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',

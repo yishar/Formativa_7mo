@@ -10,7 +10,7 @@ $this->title = 'Home';
         <h1>PUCESE</h1>
 
         <p class="lead">SisHNA</p>
-        <h6 class="lead">Bienvenidos al sistema  de registro de horas no académicas</h6>
+   <img src="../assets/logo-puce-2016-01.jpg" border="0" width=100% height=100%> 
 
   
     </div>
