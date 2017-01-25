@@ -28,31 +28,5 @@ use yii\grid\GridView;
            // 'summary'=>''
     ]); ?>
     </div>
-<h6>Hello world! jajaja</h6>
-<!--
-<table border="1">
-    <thead>
-        <tr>
-            <th>Cédula</th>
-            <th>Nombres</th>
-            <th>Apellidos</th>
-            <th>N° Matrícula</th>
-            <th>Carrera</th>
-            <th>Nivel</th>
-        </tr>       <? foreach ($data as $key => $value):         ?> 
-        <tr>
 
-            
-            <td><? $value['Cedula']?></td>
-            <td><? $value['Nombre']?></td>
-            <td><? $value['Apellido']?></td>
-            <td><? $value['N_matricula']?></td>
-            <td><? $value['Carrera']?></td>
-            <td><? $value['Nivel']?></td>
-         
-        </tr>
-           <?            endforeach; ?>
-    </tbody>
-</table>
--->
 
