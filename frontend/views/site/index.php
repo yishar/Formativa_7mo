@@ -8,9 +8,7 @@ $this->title = 'Home';
 
     <div class="jumbotron">
         <h1>PUCESE</h1>
-
-        <p class="lead">SisHNA</p>
-   <img src="../assets/logo-puce-2016-01.jpg" border="0" width=100% height=100%> 
+   <img src="../../frontend/assets/logo-puce-2016-01.jpg" border="0" width=100% height=100%> 
 
   
     </div>
