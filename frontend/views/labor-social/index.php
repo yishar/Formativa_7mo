@@ -15,6 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 CrudAsset::register($this);
 
+$h_faltantes=250;
 ?>
 <div class="labor-social-index">
     <div id="ajaxCrudDatatable">
@@ -41,18 +42,21 @@ CrudAsset::register($this);
                 'type' => 'primary', 
                 'heading' => '<i class="glyphicon glyphicon-list"></i> Labor Socials listing',
                 'before'=>'<em>* Resize table columns just like a spreadsheet by dragging the column edges.</em>',
-                'after'=>BulkButtonWidget::widget([
-                            'buttons'=>Html::a('<i class="glyphicon glyphicon-trash"></i>&nbsp; Delete All',
-                                ["bulk-delete"] ,
-                                [
-                                    "class"=>"btn btn-danger btn-xs",
-                                    'role'=>'modal-remote-bulk',
-                                    'data-confirm'=>false, 'data-method'=>false,// for overide yii data api
-                                    'data-request-method'=>'post',
-                                    'data-confirm-title'=>'Estás seguro(a)?',
-                                    'data-confirm-message'=>'Estás seguro(a) que quieres eliminar este item?'
-                                ]),
-                        ]).                        
+                'after'=>
+//                BulkButtonWidget::widget([
+//                            'buttons'=>
+//                    Html::a('<i class="glyphicon glyphicon-trash"></i>&nbsp; Delete All',
+//                                ["bulk-delete"] ,
+//                                [
+//                                    "class"=>"btn btn-danger btn-xs",
+//                                    'role'=>'modal-remote-bulk',
+//                                    'data-confirm'=>false, 'data-method'=>false,// for overide yii data api
+//                                    'data-request-method'=>'post',
+//                                    'data-confirm-title'=>'Estás seguro(a)?',
+//                                    'data-confirm-message'=>'Estás seguro(a) que quieres eliminar este item?'
+//                                ]).
+                    '<p class="btn">HORAS FALTANTES: </p>'.($h_faltantes-$searchModel->N_horas),
+//                        ]).                        
                         '<div class="clearfix"></div>',
             ]
         ])?>
