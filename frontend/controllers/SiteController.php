@@ -18,6 +18,7 @@ use yii\data\ArrayDataProvider;
 use yii\httpclient\Client;
 use yii\helpers\Json;
 
+
 use frontend\models\LaborSocialSearch;
 
 /**
@@ -102,7 +103,7 @@ class SiteController extends Controller
     {
          $api = new \RestClient(
                  [
-                     'base_url' =>'http://localhost/servicio_estudiantes/frontend/web/index.php/api?',
+                     'base_url' =>'https://localhost/servicio_estudiantes/frontend/web/index.php/api?',
                      'headers' => [
                               'Accept' =>'application/json'
                      ]
@@ -119,53 +120,6 @@ class SiteController extends Controller
             ],
         ]);
         
-
-        
-//$resultData = [
-//    '4' => [
-//        'id'          => 4,
-//        'key'         => 'dictionary_email',
-//        'value'       => 'Email',
-//        'description' => '//email comment'
-//    ],
-//    '5' => [
-//        'id'          => 5,
-//        'key'         => 'dictionary_username',
-//        'value'       => 'Name',
-//        'description' => '//name comment'
-//    ],
-//    '6' => [
-//        'id'          => 6,
-//        'key'         => 'dictionary_new-password',
-//        'value'       => 'New password',
-//        'description' => '//new password comment'
-//    ],
-//    '7' => [
-//        'id'          => 7,
-//        'key'         => 'dictionary_current-password',
-//        'value'       => 'Current password',
-//        'description' => '//current password'
-//    ],
-//];        
-        
-              //  $query = Actividad::find();
-
-//        $dataProvider = new \yii\data\ActiveDataProvider([
-//            'query' => $resultData,
-//            
-//            //'totalCount' => 3,
-//        ]);
-        
-        
-//        $arr=[];
-//        
-//        foreach ($data as $key => $value) {
-//            $arr[]=['Cedula'=>$value['Cedula'], 'Nombre'=>$value['Nombre'], 'Apellido'=>$value['Apellido']];
-//        }
-
-        // add conditions that should always apply here
-
-   
                  
         return $this->render('estudiante',[
             //'query' => $data,
@@ -174,7 +128,32 @@ class SiteController extends Controller
             
         ]);
     }
-
+ public function actionSecretaria() {
+        $client = new Client(['baseUrl' => 'https://localhost/servicio_estudiantes/frontend/web/index.php/api?']);
+        $response = $client->createRequest()
+               // ->setUrl('estudiantes')//toma los datos del controlador estudiantes del servicio que nos estan dando
+                //->setMethod('post')
+                //->setData(['nummatricula'=>9854])busca por matricula, esto sera remplazado por el nombre del campo del formulario
+                ->addHeaders(['content-type' => 'application/json'])
+                ->send();
+        $data = Json::decode($response->content);
+        
+//         $data1=[['h_vin' =>1],['h_vin' =>0],
+//    ['h_vin' =>false],['h_vin' =>'flase'],
+//    ['h_vin' =>false],['h_vin' =>true]];
+         $data1['h_vin']='No';
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $data,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);
+        
+        return $this->render('secretaria', [
+                    'dataProvider' => $dataProvider,
+            'data1'=>$data1,
+        ]);
+    }
     /**
      * Logs out the current user.
      *

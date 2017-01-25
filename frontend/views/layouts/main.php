@@ -27,7 +27,7 @@ AppAsset::register($this);
         <div class="wrap">
             <?php
             NavBar::begin([
-                'brandLabel' => Html::img('../assets/logo-puce-2016-bg-02.jpg', ['alt'=>Yii::$app->name,'width'=>200,'height'=>60]),
+                'brandLabel' => Html::img(Yii::$app->homeUrl.'../assets/logo-puce-2016-bg-02.jpg', ['alt'=>'Logo PUCE','width'=>200,'height'=>50]),
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',
@@ -48,6 +48,7 @@ AppAsset::register($this);
                 $menuItems = [
                     ['label' => 'Inicio', 'url' => ['/site/index']],
                     ['label' => 'Estudiantes', 'url' => ['/site/estudiante']],
+                    ['label' => 'Secretaria', 'url' => ['/site/secretaria']],
 //                ['label' => 'Coordinadores', 'url' => ['/coordinador-social']],
 //                ['label' => 'Labor Social', 'url' => ['/labor-social']],
                    // ['label' => 'BACKEND', 'url' => '../../backend/web','visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin'),],
