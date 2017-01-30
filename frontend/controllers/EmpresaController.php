@@ -11,6 +11,9 @@ use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
 
+/////
+use kartik\mpdf\Pdf;
+
 /**
  * EmpresaController implements the CRUD actions for Empresa model.
  */
@@ -268,4 +271,29 @@ class EmpresaController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    
+     //////////////////////////////////////////////
+  public function actionReporte() {
+      $model = Empresa::find()->all();
+      
+      
+        $pdf = new Pdf([
+            'content' => $this->renderPartial('reporte', [
+                'model' => $model,
+            ]),
+            // 'mode'=> Pdf::MODE_CORE,
+            'format' => Pdf::FORMAT_A4,
+            //'orientation'=>Pdf::ORIENT_POTRAIT,
+            'destination' => Pdf::DEST_BROWSER,
+            //'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+            //'cssInline' => '.kv-heading-1{font-size:14px}',
+            'options' => ['title' => 'Reporte de empresas'],
+            'methods' => [
+                'setHeader' => ['Generado: ' . date("r")],
+                'setFooter' => ['|Página {PAGENO}|'],
+            ]
+        ]);
+        return $pdf->render('reporte');
+    }
+
 }

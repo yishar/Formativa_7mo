@@ -34,7 +34,7 @@ AppAsset::register($this);
                 ],
             ]);
             $menuItems = [
-                ['label' => 'Inicio', 'url' => ['/site/index']],
+                //['label' => 'Inicio', 'url' => ['/site/index']],
                 
                     //['label' => 'About', 'url' => ['/site/about']],
                     //['label' => 'Contact', 'url' => ['/site/contact']],
@@ -46,7 +46,7 @@ AppAsset::register($this);
                 
                         
                 $menuItems = [
-                    ['label' => 'Inicio', 'url' => ['/site/index']],
+                    //['label' => 'Inicio', 'url' => ['/site/index']],
                     ['label' => 'Estudiantes', 'url' => ['/site/estudiante']],
 //                ['label' => 'Coordinadores', 'url' => ['/coordinador-social']],
 //                ['label' => 'Labor Social', 'url' => ['/labor-social']],
@@ -59,8 +59,10 @@ AppAsset::register($this);
                     'visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('superadmin'),
                     'items' => [
                         ['label' => 'Prácticas', 'url' => ['/pre-profesionales'],],
-                        ['label' => 'Reporte general', 'url' => ['/pre-profesionales/reporte'],],
                         ['label' => 'Empresas', 'url' => ['/empresa'],],
+                        ['label' => 'Reporte general de prácticas', 'url' => ['/pre-profesionales/reporte'],],
+                        ['label' => 'Reporte de empresas', 'url' => ['/empresa/reporte'],],
+                        
                     ],
                 ];
                 

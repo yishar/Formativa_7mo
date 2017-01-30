@@ -20,6 +20,7 @@
                 <?php foreach ($rows as $key => $value):?>
                 <tr>
                     <td><?= $key?></td>
+                    <!--<td><?php // $value['matricula']?></td>-->
                     <td><?= $value['matricula']?></td>
                     <td><?= \yii\helpers\ArrayHelper::getValue(common\models\Empresa::findOne(['Id_Empresa'=> $value['idemp']]),'Nombre')?></td>
                     <td><?= $value['finicio']?></td>

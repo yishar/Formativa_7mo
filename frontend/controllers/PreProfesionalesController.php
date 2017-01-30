@@ -13,7 +13,6 @@ use yii\helpers\Html;
 
 /////
 use kartik\mpdf\Pdf;
-use frontend\controllers\Query;
 
 /**
  * PreProfesionalesController implements the CRUD actions for PreProfesionales model.
@@ -307,12 +306,25 @@ class PreProfesionalesController extends Controller
       $command = $model1->createCommand();
       $rows = $command->queryAll();
       
+      //Tomar los estudiantes desde el servicio      
+        $api = new \RestClient(
+                 [
+                     'base_url' =>'http://localhost/servicio_estudiantes/frontend/web/index.php/api?',
+                     'headers' => [
+                              'Accept' =>'application/json'
+                     ]
+                 ]
+                 );
+         $result = $api->get('/default');
+         $data = \yii\helpers\Json::decode($result->response);
+      
 
-        //$model = PreProfesionales::find();
+        //-------Fin Servicio --------//
         $pdf = new Pdf([
             'content' => $this->renderPartial('reporte', [
                 'model' => $model,
                 'rows' => $rows,
+                'data' => $data,
             ]),
             // 'mode'=> Pdf::MODE_CORE,
             'format' => Pdf::FORMAT_A4,
