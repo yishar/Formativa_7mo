@@ -64,9 +64,7 @@ class LaborSocialSearch extends LaborSocial
         ]);
 
         $query->andFilterWhere(['like', 'Cedula', $this->Cedula])
-            ->andFilterWhere(['like', 'N_horas', $this->N_horas])
-            ->andFilterWhere(['like', 'Fecha_inicio', $this->Fecha_inicio])
-            ->andFilterWhere(['like', 'Fecha_fin', $this->Fecha_fin]);
+            ->andFilterWhere(['like', 'N_horas', $this->N_horas]);
 
         return $dataProvider;
     }

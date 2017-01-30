@@ -59,6 +59,7 @@ AppAsset::register($this);
                     'visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('superadmin'),
                     'items' => [
                         ['label' => 'Prácticas', 'url' => ['/pre-profesionales'],],
+                        ['label' => 'Reporte general', 'url' => ['/pre-profesionales/reporte'],],
                         ['label' => 'Empresas', 'url' => ['/empresa'],],
                     ],
                 ];

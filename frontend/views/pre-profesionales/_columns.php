@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Url;
 
+
 return [
     [
         'class' => 'kartik\grid\CheckboxColumn',
@@ -29,14 +30,38 @@ return [
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Fecha_inicio',
+            'value' => 'Fecha_inicio',
+            'format' => 'raw',
+            'filter'=> \kartik\datetime\DateTimePicker::widget([
+                'model'=> $searchModel,
+                'attribute' => 'Fecha_inicio',
+                'pluginOptions' => [
+                    'autoclose'=>true,
+                    'format'=>'yyyy-mm-dd',
+                ]
+                
+            ])
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Fecha_fin',
+            'value' => 'Fecha_fin',
+            'format' => 'raw',
+            'filter'=> \kartik\datetime\DateTimePicker::widget([
+                'model'=> $searchModel,
+                'attribute' => 'Fecha_fin',
+                'pluginOptions' => [
+                    'autoclose'=>true,
+                    'format'=>'yyyy-mm-dd',
+                ]
+                
+            ])
     ],
+  
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'N_Horas',
+        'footer' =>$sum,
     ],
     [
         'class' => 'kartik\grid\ActionColumn',

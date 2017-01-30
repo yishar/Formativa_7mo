@@ -41,7 +41,7 @@ CrudAsset::register($this);
                 'type' => 'primary', 
                 'heading' => '<i class="glyphicon glyphicon-list"></i> Labor Socials listing',
                 'before'=>'<em>* Resize table columns just like a spreadsheet by dragging the column edges.</em>',
-                'after'=>BulkButtonWidget::widget([
+                /*'after'=>BulkButtonWidget::widget([
                             'buttons'=>Html::a('<i class="glyphicon glyphicon-trash"></i>&nbsp; Delete All',
                                 ["bulk-delete"] ,
                                 [
@@ -52,7 +52,7 @@ CrudAsset::register($this);
                                     'data-confirm-title'=>'Estás seguro(a)?',
                                     'data-confirm-message'=>'Estás seguro(a) que quieres eliminar este item?'
                                 ]),
-                        ]).                        
+                        ]).*/                        
                         '<div class="clearfix"></div>',
             ]
         ])?>

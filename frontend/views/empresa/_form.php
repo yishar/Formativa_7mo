@@ -35,6 +35,7 @@ use kartik\file\FileInput;
 </div>
      <div class="col-xs-6">
     <?= $form->field($model, 'Convenio')->radioList(['Si' => 'Si', 'No' => 'No', ])?>
+         
      </div>
          <div class="col-xs-6">
      <?=

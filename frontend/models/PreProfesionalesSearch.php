@@ -41,6 +41,7 @@ class PreProfesionalesSearch extends PreProfesionales
      */
     public function search($params)
     {
+        
         $query = PreProfesionales::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -60,10 +61,15 @@ class PreProfesionalesSearch extends PreProfesionales
             'N_Matricula' => $this->N_Matricula,
             'Id_empresa' => $this->Id_empresa,
             'N_Horas' => $this->N_Horas,
-            'Fecha_inicio' => $this->Fecha_inicio,
-            'Fecha_fin' => $this->Fecha_fin,
+            //'Fecha_inicio' => ['>', 'Fecha_inicio', $this->Fecha],
+            //'Fecha_fin' => $this->Fecha_fin,
         ]);
-
+   
+            $query->andFilterWhere(['>=', 'Fecha_inicio', $this->Fecha_inicio]);
+    $query->andFilterWhere(['<=', 'Fecha_fin', $this->Fecha_fin]);
+        
+        
         return $dataProvider;
     }
+    
 }
