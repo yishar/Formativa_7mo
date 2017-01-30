@@ -34,7 +34,7 @@ AppAsset::register($this);
                 ],
             ]);
             $menuItems = [
-                //['label' => 'Inicio', 'url' => ['/site/index']],
+                ['label' => 'Inicio', 'url' => ['/site/index']],
                 
                     //['label' => 'About', 'url' => ['/site/about']],
                     //['label' => 'Contact', 'url' => ['/site/contact']],
@@ -46,7 +46,7 @@ AppAsset::register($this);
                 
                         
                 $menuItems = [
-                    //['label' => 'Inicio', 'url' => ['/site/index']],
+                    ['label' => 'Inicio', 'url' => ['/site/index']],
                     ['label' => 'Estudiantes', 'url' => ['/site/estudiante']],
 //                ['label' => 'Coordinadores', 'url' => ['/coordinador-social']],
 //                ['label' => 'Labor Social', 'url' => ['/labor-social']],
