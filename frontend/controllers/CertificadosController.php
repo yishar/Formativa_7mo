@@ -3,21 +3,18 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\PreProfesionales;
-use frontend\models\PreProfesionalesSearch;
+use common\models\Certificados;
+use frontend\models\CertificadosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
 
-/////
-use kartik\mpdf\Pdf;
-
 /**
- * PreProfesionalesController implements the CRUD actions for PreProfesionales model.
+ * CertificadosController implements the CRUD actions for Certificados model.
  */
-class PreProfesionalesController extends Controller
+class CertificadosController extends Controller
 {
     /**
      * @inheritdoc
@@ -36,15 +33,14 @@ class PreProfesionalesController extends Controller
     }
 
     /**
-     * Lists all PreProfesionales models.
+     * Lists all Certificados models.
      * @return mixed
      */
     public function actionIndex()
-    {
-        
-        $searchModel = new PreProfesionalesSearch();
+    {    
+        $searchModel = new CertificadosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->pagination->pageSize=3;
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -53,7 +49,7 @@ class PreProfesionalesController extends Controller
 
 
     /**
-     * Displays a single PreProfesionales model.
+     * Displays a single Certificados model.
      * @param integer $id
      * @return mixed
      */
@@ -63,7 +59,7 @@ class PreProfesionalesController extends Controller
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                    'title'=> "PreProfesionales #".$id,
+                    'title'=> "Certificados #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $this->findModel($id),
                     ]),
@@ -78,7 +74,7 @@ class PreProfesionalesController extends Controller
     }
 
     /**
-     * Creates a new PreProfesionales model.
+     * Creates a new Certificados model.
      * For ajax request will return json object
      * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -86,19 +82,7 @@ class PreProfesionalesController extends Controller
     public function actionCreate()
     {
         $request = Yii::$app->request;
-        $model = new PreProfesionales(); 
-        
-        //Tomar los estudiantes desde el servicio      
-        $api = new \RestClient(
-                 [
-                     'base_url' =>'http://localhost/servicio_estudiantes/frontend/web/index.php/api?',
-                     'headers' => [
-                              'Accept' =>'application/json'
-                     ]
-                 ]
-                 );
-         $result = $api->get('/default');
-         $data = \yii\helpers\Json::decode($result->response);
+        $model = new Certificados();  
 
         if($request->isAjax){
             /*
@@ -107,33 +91,31 @@ class PreProfesionalesController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Crear nueva Práctica",
+                    'title'=> "Create new Certificados",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
-                        'data' => $data,
                     ]),
-                    'footer'=> Html::button('Cerrar',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Guardar',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Crear nueva Práctica",
-                    'content'=>'<span class="text-success">Create PreProfesionales success</span>',
-                    'footer'=> Html::button('Cerrar',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Crear Mas',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                    'title'=> "Create new Certificados",
+                    'content'=>'<span class="text-success">Create Certificados success</span>',
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
         
                 ];         
             }else{           
                 return [
-                    'title'=> "Crear nueva Práctica",
+                    'title'=> "Create new Certificados",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
-                        'data' => $data,
                     ]),
-                    'footer'=> Html::button('Cerrar',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Guardar',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
             }
@@ -142,7 +124,7 @@ class PreProfesionalesController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->Id_pre_profesionales]);
+                return $this->redirect(['view', 'id' => $model->id_certificado]);
             } else {
                 return $this->render('create', [
                     'model' => $model,
@@ -153,7 +135,7 @@ class PreProfesionalesController extends Controller
     }
 
     /**
-     * Updates an existing PreProfesionales model.
+     * Updates an existing Certificados model.
      * For ajax request will return json object
      * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
@@ -171,7 +153,7 @@ class PreProfesionalesController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Update PreProfesionales #".$id,
+                    'title'=> "Update Certificados #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -181,7 +163,7 @@ class PreProfesionalesController extends Controller
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "PreProfesionales #".$id,
+                    'title'=> "Certificados #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $model,
                     ]),
@@ -190,7 +172,7 @@ class PreProfesionalesController extends Controller
                 ];    
             }else{
                  return [
-                    'title'=> "Update PreProfesionales #".$id,
+                    'title'=> "Update Certificados #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -203,7 +185,7 @@ class PreProfesionalesController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->Id_pre_profesionales]);
+                return $this->redirect(['view', 'id' => $model->id_certificado]);
             } else {
                 return $this->render('update', [
                     'model' => $model,
@@ -213,7 +195,7 @@ class PreProfesionalesController extends Controller
     }
 
     /**
-     * Delete an existing PreProfesionales model.
+     * Delete an existing Certificados model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -241,7 +223,7 @@ class PreProfesionalesController extends Controller
     }
 
      /**
-     * Delete multiple existing PreProfesionales model.
+     * Delete multiple existing Certificados model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -272,64 +254,18 @@ class PreProfesionalesController extends Controller
     }
 
     /**
-     * Finds the PreProfesionales model based on its primary key value.
+     * Finds the Certificados model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return PreProfesionales the loaded model
+     * @return Certificados the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = PreProfesionales::findOne($id)) !== null) {
+        if (($model = Certificados::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-    
-    //////////////////////////////////////////////
-  public function actionReporte() {
-      $model = PreProfesionales::find()->groupBy('N_Matricula')->all();
-      $model1 = PreProfesionales::find()->select(['N_Matricula as matricula, Id_Empresa as idemp, Fecha_inicio as finicio, Fecha_fin as ffin, sum(N_Horas) as horas, (abs(240-sum(N_Horas))) as restantes'])->groupBy('N_Matricula');
-      $command = $model1->createCommand();
-      $rows = $command->queryAll();
-      
-      //Tomar los estudiantes desde el servicio      
-        $api = new \RestClient(
-                 [
-                     'base_url' =>'http://localhost/servicio_estudiantes/frontend/web/index.php/api?',
-                     'headers' => [
-                              'Accept' =>'application/json'
-                     ]
-                 ]
-                 );
-         $result = $api->get('/default');
-         $data = \yii\helpers\Json::decode($result->response);
-      
-
-        //-------Fin Servicio --------//
-        $pdf = new Pdf([
-            'content' => $this->renderPartial('reporte', [
-                'model' => $model,
-                'rows' => $rows,
-                'data' => $data,
-            ]),
-            // 'mode'=> Pdf::MODE_CORE,
-            'format' => Pdf::FORMAT_A4,
-            //'orientation'=>Pdf::ORIENT_POTRAIT,
-            'destination' => Pdf::DEST_BROWSER,
-            //'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
-            //'cssInline' => '.kv-heading-1{font-size:14px}',
-            'options' => ['title' => 'Reporte de horas por estdiante'],
-            'methods' => [
-                'setHeader' => ['Generado: ' . date("r")],
-                'setFooter' => ['|PÃ¡gina {PAGENO}|'],
-            ]
-        ]);
-        return $pdf->render('reporte');
-    }
-
-
-
-
 }

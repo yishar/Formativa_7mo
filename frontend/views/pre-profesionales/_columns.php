@@ -61,7 +61,6 @@ return [
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'N_Horas',
-        'footer' =>$sum,
     ],
     [
         'class' => 'kartik\grid\ActionColumn',

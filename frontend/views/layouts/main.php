@@ -55,6 +55,15 @@ AppAsset::register($this);
                 
                 //Aqui van las opciones del menú
                 $menuItems[] = [
+                    'label' => 'Certificado internacional',
+                    'visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('superadmin'),
+                    'items' => [
+                        ['label' => 'Ver o Crear', 'url' => ['/certificados'],],
+                    ],
+                ];
+                
+                //Aqui van las opciones del menú
+                $menuItems[] = [
                     'label' => 'Prácticas Pre-Profesionales',
                     'visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('superadmin'),
                     'items' => [
