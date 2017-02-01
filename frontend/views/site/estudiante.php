@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+//use yii\grid\GridView;
+use kartik\grid\GridView;
 
 
 /* 
@@ -14,9 +15,10 @@ use yii\grid\GridView;
 ?>
 
 <div class="body-content">
-
+<div id="ajaxCrudDatatable">
         <?= GridView::widget([
         'dataProvider' => $dataProvider,
+           'pjax'=>true,
           'columns' => [
             'Cedula',
             'Nombre',
@@ -25,8 +27,17 @@ use yii\grid\GridView;
             'Carrera',
             'Nivel',
         ],
-           // 'summary'=>''
+     'summary'=>'',
+    'striped' => true,
+    'condensed' => true,
+    'responsive' => true,          
+    'panel' => [
+        'type' => 'primary', 
+        'heading' => '<i class="glyphicon glyphicon-list"></i>  Lista Estudiantes PUCESE',
+        'after'=>'<div class="clearfix"></div>',
+                ],
     ]); ?>
+    </div>
     </div>
 <!--
 <table border="1">

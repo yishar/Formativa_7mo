@@ -40,10 +40,13 @@ class CertificadosController extends Controller
     {    
         $searchModel = new CertificadosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        
+
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            //'estudiante' => $data,
         ]);
     }
 
@@ -82,7 +85,19 @@ class CertificadosController extends Controller
     public function actionCreate()
     {
         $request = Yii::$app->request;
-        $model = new Certificados();  
+        $model = new Certificados(); 
+        
+        //Tomar los estudiantes desde el servicio      
+        $api = new \RestClient(
+                 [
+                     'base_url' =>'http://localhost/servicio_estudiantes/frontend/web/index.php/api?',
+                     'headers' => [
+                              'Accept' =>'application/json'
+                     ]
+                 ]
+                 );
+         $result = $api->get('/default');
+         $data = \yii\helpers\Json::decode($result->response);
 
         if($request->isAjax){
             /*
@@ -94,9 +109,10 @@ class CertificadosController extends Controller
                     'title'=> "Create new Certificados",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
+                        'data' => $data,
                     ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"])
+                                
         
                 ];         
             }else if($model->load($request->post()) && $model->save()){
@@ -113,6 +129,7 @@ class CertificadosController extends Controller
                     'title'=> "Create new Certificados",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
+                        'data' => $data,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
@@ -124,7 +141,7 @@ class CertificadosController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id_certificado]);
+                return $this->redirect(['index' /*, 'id' => $model->id_certificado*/]);
             } else {
                 return $this->render('create', [
                     'model' => $model,

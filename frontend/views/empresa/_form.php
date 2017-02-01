@@ -47,7 +47,7 @@ use kartik\file\FileInput;
                 'pluginOptions' => [
                     'allowedFileExtensions' => ['pdf'],
                     'browseIcon' => '<i class="glyphicon glyphicon-list-alt"></i> ',
-                    'browseLabel' => 'Cagar',
+                    'browseLabel' => 'Cargar',
                 ],
             ])
             ?>     

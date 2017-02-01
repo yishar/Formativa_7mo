@@ -20,6 +20,7 @@ AppAsset::register($this);
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
+        <link rel="shortcut icon" href="../../assets/logo.jpg" />
     </head>
     <body>
         <?php $this->beginBody() ?>
@@ -27,7 +28,7 @@ AppAsset::register($this);
         <div class="wrap">
             <?php
             NavBar::begin([
-                'brandLabel' => 'App',
+                //'brandLabel' => 'SisHNA',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',
@@ -35,7 +36,6 @@ AppAsset::register($this);
             ]);
             $menuItems = [
                 ['label' => 'Inicio', 'url' => ['/site/index']],
-                
                     //['label' => 'About', 'url' => ['/site/about']],
                     //['label' => 'Contact', 'url' => ['/site/contact']],
             ];
@@ -47,7 +47,7 @@ AppAsset::register($this);
                         
                 $menuItems = [
                     ['label' => 'Inicio', 'url' => ['/site/index']],
-                    ['label' => 'Estudiantes', 'url' => ['/site/estudiante']],
+                    //['label' => 'Estudiantes', 'url' => ['/site/estudiante']],
 //                ['label' => 'Coordinadores', 'url' => ['/coordinador-social']],
 //                ['label' => 'Labor Social', 'url' => ['/labor-social']],
                    // ['label' => 'BACKEND', 'url' => '../../backend/web','visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin'),],
@@ -55,8 +55,16 @@ AppAsset::register($this);
                 
                 //Aqui van las opciones del menú
                 $menuItems[] = [
+                    'label' => 'Servicios web',
+                    'visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin'),
+                    'items' => [
+                        ['label' => 'Estudiantes', 'url' => ['/site/estudiante']],
+                    ],
+                ];
+                //Aqui van las opciones del menú
+                $menuItems[] = [
                     'label' => 'Certificado internacional',
-                    'visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('superadmin'),
+                    'visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin') || Yii::$app->user->can('AdministradorSecretaria'),
                     'items' => [
                         ['label' => 'Ver o Crear', 'url' => ['/certificados'],],
                     ],
@@ -64,8 +72,17 @@ AppAsset::register($this);
                 
                 //Aqui van las opciones del menú
                 $menuItems[] = [
+                    'label' => 'Secretaría',
+                    'visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin') || Yii::$app->user->can('AdministradorSecretaria'),
+                    'items' => [
+                        ['label' => 'Habilitar estudiantes', 'url' => ['site/secretaria'],],
+                    ],
+                ];
+                
+                //Aqui van las opciones del menú
+                $menuItems[] = [
                     'label' => 'Prácticas Pre-Profesionales',
-                    'visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('superadmin'),
+                    'visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin') || Yii::$app->user->can('AdministradorPracticasPre-Profesionales'),
                     'items' => [
                         ['label' => 'Prácticas', 'url' => ['/pre-profesionales'],],
                         ['label' => 'Empresas', 'url' => ['/empresa'],],
@@ -78,7 +95,7 @@ AppAsset::register($this);
                 //Aqui van las opciones del menú
                 $menuItems[] = [
                     'label' => 'Labor Social',
-                    'visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('superadmin'),
+                    'visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin') || Yii::$app->user->can('AdministradorLaborSocial'),
                     'items' => [
                         ['label' => 'Labor Social', 'url' => ['/labor-social'],],
                         ['label' => 'Actividades', 'url' => ['/actividad'],],

@@ -110,7 +110,7 @@ class SiteController extends Controller
                  );
          $result = $api->get('/default');
         $data = \yii\helpers\Json::decode($result->response);
-        
+       
        
         $dataProvider = new ArrayDataProvider([
             'allModels' => $data,
@@ -118,59 +118,70 @@ class SiteController extends Controller
                 'pageSize' => 10,
             ],
         ]);
-        
-
-        
-//$resultData = [
-//    '4' => [
-//        'id'          => 4,
-//        'key'         => 'dictionary_email',
-//        'value'       => 'Email',
-//        'description' => '//email comment'
-//    ],
-//    '5' => [
-//        'id'          => 5,
-//        'key'         => 'dictionary_username',
-//        'value'       => 'Name',
-//        'description' => '//name comment'
-//    ],
-//    '6' => [
-//        'id'          => 6,
-//        'key'         => 'dictionary_new-password',
-//        'value'       => 'New password',
-//        'description' => '//new password comment'
-//    ],
-//    '7' => [
-//        'id'          => 7,
-//        'key'         => 'dictionary_current-password',
-//        'value'       => 'Current password',
-//        'description' => '//current password'
-//    ],
-//];        
-        
-              //  $query = Actividad::find();
-
-//        $dataProvider = new \yii\data\ActiveDataProvider([
-//            'query' => $resultData,
-//            
-//            //'totalCount' => 3,
-//        ]);
-        
-        
-//        $arr=[];
-//        
-//        foreach ($data as $key => $value) {
-//            $arr[]=['Cedula'=>$value['Cedula'], 'Nombre'=>$value['Nombre'], 'Apellido'=>$value['Apellido']];
-//        }
-
-        // add conditions that should always apply here
-
-   
                  
         return $this->render('estudiante',[
             //'query' => $data,
              'dataProvider' => $dataProvider,
             'data' => $data,
+            
+        ]);
+    }
+    
+     public function actionSecretaria()
+    {
+         //Pasar datos del servicio de estudiante
+         $api = new \RestClient(
+                 [
+                     'base_url' =>'http://localhost/servicio_estudiantes/frontend/web/index.php/api?',
+                     'headers' => [
+                              'Accept' =>'application/json'
+                     ]
+                 ]
+                 );
+         $result = $api->get('/default');
+        $estudiante = \yii\helpers\Json::decode($result->response);
+         //-------Hasta aki----------//
+         
+         //Pasar datos del servicio de vinculacion
+         $api1 = new \RestClient(
+                 [
+                     'base_url' =>'http://localhost/servicio_estudiantes/frontend/web/index.php/api2?',
+                     'headers' => [
+                              'Accept' =>'application/json'
+                     ]
+                 ]
+                 );
+         $result1 = $api1->get('/default');
+        $vinculacion = \yii\helpers\Json::decode($result1->response);
+        //-------Hasta aki----------//
+        
+        //Pasar datos de practicas pre-profesionales
+        $model1 = \common\models\PreProfesionales::find()->select(['N_Matricula as matricula, Id_Empresa as idemp, Fecha_inicio as finicio, Fecha_fin as ffin, sum(N_Horas) as horas, (abs(240-sum(N_Horas))) as restantes'])->groupBy('N_Matricula');
+        $command = $model1->createCommand();
+        $practicas = $command->queryAll();
+        //-------Hasta aki----------//
+        
+        //Pasar datos de certificados 
+        $model2 = \common\models\Certificados::find()->select(['matricula as matricula1'])->groupBy('matricula');
+        $command2 = $model2->createCommand();
+        $certificado = $command2->queryAll();
+        //-------Hasta aki----------//
+        
+        //-------Utilizamos dataProvider para mandarlo a la vista ---------//
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $estudiante,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);
+        
+        return $this->render('secretaria',[
+            //'query' => $data,
+             'dataProvider' => $dataProvider,
+            'estudiante' => $estudiante,
+            'vinculacion' => $vinculacion,
+            'preprofesionales' => $practicas,
+            'certificado' => $certificado,
             
         ]);
     }
