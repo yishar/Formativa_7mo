@@ -11,6 +11,9 @@ use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
 
+
+
+use yii\filters\AccessControl;
 /**
  * CertificadosController implements the CRUD actions for Certificados model.
  */
@@ -22,13 +25,28 @@ class CertificadosController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                    'bulk-delete' => ['post'],
+                'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+//                [
+//                        'actions' => ['logout', 'index', 'create', 'update', 'view', ],
+//                        'allow' => true,
+//                        'roles' => ['AdministradorLaborSocial'],
+//                ],
+                [
+                        'actions' => ['index', 'create', 'update', ],
+                        'allow' => true,
+                        'roles' => ['AdministradorPracticasPre-Profesionales'],
                 ],
-            ],
+                    ],
+                    ],
+//            'verbs' => [
+//                'class' => VerbFilter::className(),
+//                'actions' => [
+//                    'delete' => ['post'],
+//                    'bulk-delete' => ['post'],
+//                ],
+//            ],
         ];
     }
 
@@ -161,7 +179,19 @@ class CertificadosController extends Controller
     public function actionUpdate($id)
     {
         $request = Yii::$app->request;
-        $model = $this->findModel($id);       
+        $model = $this->findModel($id);
+        
+        //Tomar los estudiantes desde el servicio      
+        $api = new \RestClient(
+                 [
+                     'base_url' =>'http://localhost/servicio_estudiantes/frontend/web/index.php/api?',
+                     'headers' => [
+                              'Accept' =>'application/json'
+                     ]
+                 ]
+                 );
+         $result = $api->get('/default');
+         $data = \yii\helpers\Json::decode($result->response);
 
         if($request->isAjax){
             /*
@@ -173,6 +203,7 @@ class CertificadosController extends Controller
                     'title'=> "Update Certificados #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
+                        'data' => $data,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
@@ -183,6 +214,7 @@ class CertificadosController extends Controller
                     'title'=> "Certificados #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $model,
+                        'data' => $data,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
@@ -192,6 +224,7 @@ class CertificadosController extends Controller
                     'title'=> "Update Certificados #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
+                        'data' => $data,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
@@ -206,6 +239,7 @@ class CertificadosController extends Controller
             } else {
                 return $this->render('update', [
                     'model' => $model,
+                    'data' => $data,
                 ]);
             }
         }
