@@ -35,7 +35,7 @@ AppAsset::register($this);
                 ],
             ]);
             $menuItems = [
-                ['label' => 'Inicio', 'url' => ['/site/index']],
+                    ['label' => 'Inicio', 'url' => ['/site/index']],
                     //['label' => 'About', 'url' => ['/site/about']],
                     //['label' => 'Contact', 'url' => ['/site/contact']],
             ];
@@ -61,12 +61,13 @@ AppAsset::register($this);
                     'visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin'),
                     'items' => [
                         ['label' => 'Estudiantes', 'url' => ['/site/estudiante']],
+                        ['label' => 'BACKEND', 'url' => ['../../backend/web']],
                     ],
                 ];
                 //Aqui van las opciones del menú
                 $menuItems[] = [
                     'label' => 'Certificado internacional',
-                    'visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin') || Yii::$app->user->can('AdministradorSecretaria')|| Yii::$app->user->can('AdministradorPracticasPre-Profesionales'),
+                    'visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin')|| Yii::$app->user->can('AdministradorPracticasPre-Profesionales'),
                     'items' => [
                         ['label' => 'Lista de certificado', 'url' => ['/certificados'],],
                     ],
