@@ -20,7 +20,7 @@ AppAsset::register($this);
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
-        <link rel="shortcut icon" href="../../assets/logo.jpg" />
+        <link rel="shortcut icon" href="../assets/logo.jpg" />
     </head>
     <body>
         <?php $this->beginBody() ?>
@@ -53,6 +53,8 @@ AppAsset::register($this);
                    // ['label' => 'BACKEND', 'url' => '../../backend/web','visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin'),],
                 ];
                 
+                
+                
                 //Aqui van las opciones del menú
                 $menuItems[] = [
                     'label' => 'Servicios web',
@@ -64,9 +66,9 @@ AppAsset::register($this);
                 //Aqui van las opciones del menú
                 $menuItems[] = [
                     'label' => 'Certificado internacional',
-                    'visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin') || Yii::$app->user->can('AdministradorSecretaria'),
+                    'visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin') || Yii::$app->user->can('AdministradorSecretaria')|| Yii::$app->user->can('AdministradorPracticasPre-Profesionales'),
                     'items' => [
-                        ['label' => 'Ver o Crear', 'url' => ['/certificados'],],
+                        ['label' => 'Lista de certificado', 'url' => ['/certificados'],],
                     ],
                 ];
                 
@@ -81,14 +83,11 @@ AppAsset::register($this);
                 
                 //Aqui van las opciones del menú
                 $menuItems[] = [
-                    'label' => 'Prácticas Pre-Profesionales',
+                    'label' => 'Prácticas PreProfesionales',
                     'visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin') || Yii::$app->user->can('AdministradorPracticasPre-Profesionales'),
                     'items' => [
-                        ['label' => 'Prácticas', 'url' => ['/pre-profesionales'],],
-                        ['label' => 'Empresas', 'url' => ['/empresa'],],
-                        ['label' => 'Reporte general de prácticas', 'url' => ['/pre-profesionales/reporte'],],
-                        ['label' => 'Reporte de empresas', 'url' => ['/empresa/reporte'],],
-                        
+                        ['label' => 'Lista de Prácticas', 'url' => ['/pre-profesionales'],],
+                        ['label' => 'Lista de Empresas', 'url' => ['/empresa'],],
                     ],
                 ];
                 
@@ -97,7 +96,7 @@ AppAsset::register($this);
                     'label' => 'Labor Social',
                     'visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin') || Yii::$app->user->can('AdministradorLaborSocial'),
                     'items' => [
-                        ['label' => 'Labor Social', 'url' => ['/labor-social'],],
+                        ['label' => 'Lista Labor Social', 'url' => ['/labor-social'],],
                         ['label' => 'Actividades', 'url' => ['/actividad'],],
                         ['label' => 'Coordinadores', 'url' => ['/coordinador-social'],],
                     ],
@@ -135,9 +134,9 @@ Breadcrumbs::widget([
 
         <footer class="footer">
             <div class="container">
-                <p class="pull-left">&copy; PUCESE <?= date('Y') ?></p>
+                <p class="pull-left">&copy; SisHNA - PUCESE <?= date('Y'.'.') ?></p>
 
-                <!--p class="pull-right">< ?= Yii::powered() ?></p-->
+                <!--<p class="pull-right"><?php// echo 'Sistema  de registro de horas no académicas' ?></p>-->
             </div>
         </footer>
 

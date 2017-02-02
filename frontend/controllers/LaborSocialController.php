@@ -11,6 +11,9 @@ use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
 
+/////
+use kartik\mpdf\Pdf;
+
 /**
  * LaborSocialController implements the CRUD actions for LaborSocial model.
  */
@@ -67,7 +70,7 @@ class LaborSocialController extends Controller
         
         $searchModel = new LaborSocialSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $dataProvider->pagination->pageSize=3;
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -189,7 +192,19 @@ class LaborSocialController extends Controller
     public function actionUpdate($id)
     {
         $request = Yii::$app->request;
-        $model = $this->findModel($id);       
+        $model = $this->findModel($id);
+        //Tomar los estudiantes desde el servicio 
+        $api = new \RestClient(
+                 [
+                     'base_url' =>'http://localhost/servicio_estudiantes/frontend/web/index.php/api?',
+                     'headers' => [
+                              'Accept' =>'application/json'
+                     ]
+                 ]
+                 );
+         $result = $api->get('/default');
+        $data = \yii\helpers\Json::decode($result->response);
+       
 
         if($request->isAjax){
             /*
@@ -201,6 +216,7 @@ class LaborSocialController extends Controller
                     'title'=> "Update LaborSocial #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
+                        'data' => $data,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
@@ -211,6 +227,7 @@ class LaborSocialController extends Controller
                     'title'=> "LaborSocial #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $model,
+                        'data' => $data,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
@@ -220,6 +237,7 @@ class LaborSocialController extends Controller
                     'title'=> "Update LaborSocial #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
+                        'data' => $data,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
@@ -234,6 +252,7 @@ class LaborSocialController extends Controller
             } else {
                 return $this->render('update', [
                     'model' => $model,
+                    'data' => $data,
                 ]);
             }
         }
@@ -312,5 +331,47 @@ class LaborSocialController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+    
+    //////////////////////Para reporte general////////////////////////
+  public function actionReporte() {
+      $model = LaborSocial::find()->groupBy('Cedula')->all();
+      $model1 = LaborSocial::find()->select(['Cedula as cedula, Id_actividad as idact, sum(N_horas) as horas'])->groupBy('Cedula');
+      $command = $model1->createCommand();
+      $rows = $command->queryAll();
+      
+      //Tomar los estudiantes desde el servicio      
+        $api = new \RestClient(
+                 [
+                     'base_url' =>'http://localhost/servicio_estudiantes/frontend/web/index.php/api?',
+                     'headers' => [
+                              'Accept' =>'application/json'
+                     ]
+                 ]
+                 );
+         $result = $api->get('/default');
+         $data = \yii\helpers\Json::decode($result->response);
+      
+
+        //-------Fin Servicio --------//
+        $pdf = new Pdf([
+            'content' => $this->renderPartial('reporte', [
+                'model' => $model,
+                'rows' => $rows,
+                'data' => $data,
+            ]),
+            // 'mode'=> Pdf::MODE_CORE,
+            'format' => Pdf::FORMAT_A4,
+            //'orientation'=>Pdf::ORIENT_POTRAIT,
+            'destination' => Pdf::DEST_BROWSER,
+            //'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+            //'cssInline' => '.kv-heading-1{font-size:14px}',
+            'options' => ['title' => 'Reporte de horas por estdiante'],
+            'methods' => [
+                'setHeader' => ['Generado: ' . date("r")],
+                'setFooter' => ['|PÃ¡gina {PAGENO}|'],
+            ]
+        ]);
+        return $pdf->render('reporte');
     }
 }

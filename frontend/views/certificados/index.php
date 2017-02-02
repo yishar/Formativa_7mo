@@ -16,6 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
 CrudAsset::register($this);
 
 ?>
+
+<link rel="shortcut icon" href="../../assets/logo.jpg" />
 <div class="certificados-index">
     <div id="ajaxCrudDatatable">
         <?=GridView::widget([

@@ -1,3 +1,5 @@
+<link rel="shortcut icon" href="../../assets/logo.jpg" />
+
 <h1>
     REPORTE GENERAL DE EMPRESAS
 </h1>

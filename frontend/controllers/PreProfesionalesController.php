@@ -41,11 +41,24 @@ class PreProfesionalesController extends Controller
      */
     public function actionIndex()
     {
+        //Tomar los estudiantes desde el servicio      
+        $api = new \RestClient(
+                 [
+                     'base_url' =>'http://localhost/servicio_estudiantes/frontend/web/index.php/api?',
+                     'headers' => [
+                              'Accept' =>'application/json'
+                     ]
+                 ]
+                 );
+         $result = $api->get('/default');
+         $data = \yii\helpers\Json::decode($result->response);
+         //------------------//
         
         $searchModel = new PreProfesionalesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->pagination->pageSize=3;
         return $this->render('index', [
+            'data' => $data,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -162,7 +175,19 @@ class PreProfesionalesController extends Controller
     public function actionUpdate($id)
     {
         $request = Yii::$app->request;
-        $model = $this->findModel($id);       
+        $model = $this->findModel($id);
+        
+        //Tomar los estudiantes desde el servicio      
+        $api = new \RestClient(
+                 [
+                     'base_url' =>'http://localhost/servicio_estudiantes/frontend/web/index.php/api?',
+                     'headers' => [
+                              'Accept' =>'application/json'
+                     ]
+                 ]
+                 );
+         $result = $api->get('/default');
+         $data = \yii\helpers\Json::decode($result->response);
 
         if($request->isAjax){
             /*
@@ -174,6 +199,7 @@ class PreProfesionalesController extends Controller
                     'title'=> "Update PreProfesionales #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
+                        'data' => $data,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
@@ -184,6 +210,7 @@ class PreProfesionalesController extends Controller
                     'title'=> "PreProfesionales #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $model,
+                        'data' => $data,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
@@ -193,6 +220,7 @@ class PreProfesionalesController extends Controller
                     'title'=> "Update PreProfesionales #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
+                        'data' => $data,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
@@ -207,6 +235,7 @@ class PreProfesionalesController extends Controller
             } else {
                 return $this->render('update', [
                     'model' => $model,
+                    'data' => $data,
                 ]);
             }
         }
@@ -287,7 +316,7 @@ class PreProfesionalesController extends Controller
         }
     }
     
-    //////////////////////////////////////////////
+    //////////////////////Para reporte general////////////////////////
   public function actionReporte() {
       $model = PreProfesionales::find()->groupBy('N_Matricula')->all();
       $model1 = PreProfesionales::find()->select(['N_Matricula as matricula, Id_Empresa as idemp, Fecha_inicio as finicio, Fecha_fin as ffin, sum(N_Horas) as horas, (abs(240-sum(N_Horas))) as restantes'])->groupBy('N_Matricula');

@@ -18,8 +18,10 @@ return [
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'N_Matricula',
-       
+        
+        
     ],
+   
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Id_empresa',

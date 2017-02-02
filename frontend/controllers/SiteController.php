@@ -115,7 +115,7 @@ class SiteController extends Controller
         $dataProvider = new ArrayDataProvider([
             'allModels' => $data,
             'pagination' => [
-                'pageSize' => 10,
+                'pageSize' => 5,
             ],
         ]);
                  

@@ -18,6 +18,7 @@ use kartik\grid\GridView;
 <div id="ajaxCrudDatatable">
         <?= GridView::widget([
         'dataProvider' => $dataProvider,
+           //'filterModel' => $searchModel,
            'pjax'=>true,
           'columns' => [
             'Cedula',

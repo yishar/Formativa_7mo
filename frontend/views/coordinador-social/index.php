@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 CrudAsset::register($this);
 
 ?>
+<link rel="shortcut icon" href="../../assets/logo.jpg" />
 <div class="coordinador-social-index">
     <div id="ajaxCrudDatatable">
         <?=GridView::widget([
@@ -39,9 +40,9 @@ CrudAsset::register($this);
             'responsive' => true,          
             'panel' => [
                 'type' => 'primary', 
-                'heading' => '<i class="glyphicon glyphicon-list"></i> Coordinador Socials listing',
-                'before'=>'<em>* Resize table columns just like a spreadsheet by dragging the column edges.</em>',
-                /*'after'=>BulkButtonWidget::widget([
+                'heading' => '<i class="glyphicon glyphicon-list"></i> Lista de Coordinadores de Labor Social',
+                /*'before'=>'<em>* Resize table columns just like a spreadsheet by dragging the column edges.</em>',
+                'after'=>BulkButtonWidget::widget([
                             'buttons'=>Html::a('<i class="glyphicon glyphicon-trash"></i>&nbsp; Delete All',
                                 ["bulk-delete"] ,
                                 [

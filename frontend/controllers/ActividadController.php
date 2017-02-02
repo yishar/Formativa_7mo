@@ -40,7 +40,7 @@ class ActividadController extends Controller
     {    
         $searchModel = new ActividadSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $dataProvider->pagination->pageSize=3;
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

@@ -40,7 +40,7 @@ class CertificadosController extends Controller
     {    
         $searchModel = new CertificadosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        
+        $dataProvider->pagination->pageSize=3;
 
 
         return $this->render('index', [
@@ -119,14 +119,14 @@ class CertificadosController extends Controller
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "Create new Certificados",
-                    'content'=>'<span class="text-success">Create Certificados success</span>',
+                    'content'=>'<span class="text-success">Registro de Certificado creado exitosamente</span>',
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
         
                 ];         
             }else{           
                 return [
-                    'title'=> "Create new Certificados",
+                    'title'=> "Crear nuevo Certificado",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                         'data' => $data,

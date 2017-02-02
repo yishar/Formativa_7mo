@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 CrudAsset::register($this);
 
 ?>
+<link rel="shortcut icon" href="../../assets/logo.jpg" />
 <div class="labor-social-index">
     <div id="ajaxCrudDatatable">
         <?=GridView::widget([
@@ -39,9 +40,9 @@ CrudAsset::register($this);
             'responsive' => true,          
             'panel' => [
                 'type' => 'primary', 
-                'heading' => '<i class="glyphicon glyphicon-list"></i> Labor Socials listing',
-                'before'=>'<em>* Resize table columns just like a spreadsheet by dragging the column edges.</em>',
-                /*'after'=>BulkButtonWidget::widget([
+                'heading' => '<i class="glyphicon glyphicon-list"></i> Lista de estudiantes que han realizado Labor Social',
+                /*'before'=>'<em>* Resize table columns just like a spreadsheet by dragging the column edges.</em>',
+                'after'=>BulkButtonWidget::widget([
                             'buttons'=>Html::a('<i class="glyphicon glyphicon-trash"></i>&nbsp; Delete All',
                                 ["bulk-delete"] ,
                                 [
@@ -56,6 +57,7 @@ CrudAsset::register($this);
                         '<div class="clearfix"></div>',
             ]
         ])?>
+        <?= Html::a('<i class="glyphicon glyphicon-file"> &nbsp; REPORTE GENERAL </i>',['reporte'],['target'=>'_blank','class'=>'btn btn-info','title'=> 'Generar reporte de Labor Social'])?>
     </div>
 </div>
 <?php Modal::begin([
